@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="res/favicon.ico">
+    <title>Dragon Den - Wiki</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+<div id="sidebarHotzone" aria-hidden="true"></div>
+<div id="sidebar">
+    <h2 id="home-title">Dragon Den - Wiki</h2>
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search content..." oninput="filterContent()">
+        <button id="dyslexicToggle" type="button" class="btn-small" aria-pressed="false" title="Toggle OpenDyslexic (Alt+D)"> Dyslexic Mode: Off </button>
+    </div>
+    <ul id="menus">
+        <p>General</p>
+        <ul id="category-list">
+            <li onclick="showContent('home')">Home</li>
+            <li onclick="showContent('about')">About Me</li>
+            <li onclick="showContent('mods')">Dragon Den - Mods</li>
+        </ul>
+
+        <p>Wiki Pages</p>
+        <ul id="category-list2">
+            <li onclick="showContent('euphoria')">Dragon Den - Euphoria</li>
+            <li onclick="showContent('weightsraidtimer')">Dragon Den - Weights and Raid Timer</li>
+            <li onclick="showContent('thezonemaker')">Dragon Den - The Zone Maker</li>
+            <li onclick="showContent('questimmersion')">Dragon Den - Quest Immersion</li>
+        </ul>
+    </ul>
+    <footer>
+        <div id="support-me">
+            <a href="https://ko-fi.com/drexira" target="_blank">
+                <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee">
+            </a>
+        </div>
+        <p>&copy; 2025 Drexira All rights reserved.</p>
+        <p>Dragon Den is not affiliated with Battlestate Games.</p>
+        <p>Powered by Dragon Den</p>
+    </footer>
+    <button id="sidebarCollapseBtn" aria-label="Hide sidebar" title="Hide sidebar" type="button">←</button>
+</div>
+
+<div id="content">
+    <!-- Home -->
+    <div id="home" class="content-section">
+        <h2 onclick="showContent('home')">Welcome to Dragon Den - Wiki!</h2>
+        <p>
+            The Dragon Den Wiki is your go-to resource for guides and tutorials on Dragon Den content and SPT modding.
+        </p>
+        <p>
+            Whether you're just starting out or looking to dive deeper, you'll find everything you need here.
+        </p>
+        <p>
+            Use the <b>search bar</b> to quickly find specific content, or explore the categories in the sidebar to navigate through different topics.
+        </p>
+        <p>
+            The website is still a work in progress, and I'm continuously adding new content as time allows. So, please be patient as more updates and guides are added.
+        </p>
+        <p>
+            <b>Want to contribute?</b> Feel free to fork the repository and create a pull request on the <a href="https://github.com/Drexira/Dragon-Den-Wiki" target="_blank">GitHub repository</a> with any improvements or additions you'd like to see.
+        </p>
+        <p>
+            <em>Thank you for visiting the Dragon Den!</em>
+        </p>
+    </div>
+
+    <!-- Mods -->
+    <div id="mods" class="content-section" style="display:none">
+        <h2 onclick="showContent('mods')">Dragon Den - Mods</h2>
+
+        <section>
+            <section class="mods">
+                <div id="mods-own" class="mod-container"></div>
+            </section>
+            <h2 class="seperator"></h2>
+            <section class="mods-alt">
+                <h3 style="color: var(--brand-2)">Mods I've updated or helped with</h3>
+                <div id="mods-helped" class="other-mods"></div>
+            </section>
+        </section>
+    </div>
+
+    <!-- About -->
+    <div id="about" class="content-section" style="display:none">
+        <h2 onclick="showContent('about')">About Me</h2>
+        <p>
+            I’m <b style="color:#ff6f61">Drexira</b>. I’m a self-taught programmer who mostly works on mods, tools, and game-related projects.
+        </p>
+        <p>
+            I started by tinkering with tiny scripts and simple tweaks. Broke a lot of things. Fixed them. Learned a ton. Kept going.
+        </p>
+        <p>
+            I develop my own mods for SPT and some Unity projects when an idea strikes me.
+        </p>
+        <br>
+    </div>
+    
+    <!-- Euphoria Mod Page -->
+    <div id="euphoria" class="content-section" style="display:none">
+        <h2 onclick="showContent('euphoria')">Dragon Den - Euphoria</h2>
+
+        <h4><b style="color: red">Requires</b>
+            <u style="color: darkcyan"><a href="https://forge.sp-tarkov.com/mod/649/virtuals-custom-quest-loader" target="_blank">Virtual’s Custom Quest Loader</a></u>
+        </h4>
+
+        <h3><b>What you get</b></h3>
+        <ul>
+            <li>• New trader: <b>Euphoria</b> quest unlocked</li>
+            <li>• 120 plus custom items across practical categories</li>
+            <li>• 52 quest storyline from intro to finish</li>
+            <li>• Therapist intro and a late Mechanic task</li>
+            <li>• Secure container craft in hideout</li>
+            <li>• All items on the Items page spawn in raid except secure container and containers</li>
+        </ul>
+
+        <h3>Getting started with quests</h3>
+        <ul>
+            <li>• Accept <b>Whispers Through Shattered Glass</b> from Therapist to unlock Euphoria</li>
+            <li>• Follow a straight chain with supply runs, reliability checks, deliveries and rewards</li>
+            <li>• After <b>Bad Habit</b>, pick up <b>Vapor Substitute</b> from Mechanic</li>
+            <li>• Rewards include barter items, ammo, mags, guns</li>
+        </ul>
+
+        <h3>Trader</h3>
+        <p>
+            <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Euphoria.png" alt="Euphoria Trader Portrait">
+        </p>
+        <h4><b>Anya "Euphoria" Zaytseva</b></h4>
+        <blockquote>
+            <p>Anya grew up around noise and cheap tools. If something closed right and held, she trusted it. When Norvinsk locked down, she stayed. She watched what people carried, what failed, and what they were willing to pay for when things got rough.</p>
+            <p>She took over a small signal shack by the rail, painted the door black, and started calling it the Dragon Den. Inside is simple and tidy. Pegboard with straps and buckles. Racks for rifles that actually run. Backpacks stacked by fit, not fashion. A small case for valuables that do not scream their price. Then there is the shelf she pretends is just barter. Cat paw zipper pulls, bright sling keepers, small charms, sticker sheets. She rolls her eyes when you point at it, then restocks it anyway.</p>
+            <p>She is new to contracting. No speeches, no sob stories. You say what you need, you pay clean, you leave on time. She deals in equipment that works, weapons that cycle, packs that do not quit, valuables that travel quiet, and the odd cute thing that makes a bad day lighter. She does not patch wounds and she does not promise miracles.</p>
+            <p>Therapist is the one person she will change plans for. They argue, then they sort it, and neither one wastes words. People come to Euphoria for straight deals and leave with gear that fits and a pack that will not betray them. At closing she lines up the next day’s crates, writes names on tape, and locks the door. If you ask why she keeps at it, she says, "Good gear should be easy to buy," and gets back to work.</p>
+            <p></p>
+        </blockquote>
+
+        <h3>Items</h3>
+        <p>
+            Backpacks, Valuables, Buttstocks, Containers, Facewear, Foregrips, Helmets, Muzzles, Sights, Silencers, Secure Containers, Quest items
+        </p>
+
+        <details class="spoiler">
+            <summary>Open item gallery</summary>
+            <div class="image-grid" style="--cols: 11; --thumb: 120px; --min: 90px">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Armacon_knopka.png" alt="Armacon_knopka">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/BattleLink_Minimalist_Stock_(Black).png" alt="BattleLink Minimalist Stock Black">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/BattleLink_Minimalist_Stock_(Green).png" alt="BattleLink Minimalist Stock Green">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/BattleLink_Minimalist_Stock_(Grey).png" alt="BattleLink Minimalist Stock Grey">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/BattleLink_Minimalist_Stock_(Pink).png" alt="BattleLink Minimalist Stock Pink">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/BattleLink_Minimalist_Stock_(Tan).png" alt="BattleLink Minimalist Stock Tan">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Bronze_Dragon_Figurine.png" alt="Bronze Dragon Figurine">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Car_Toy_-_Caravan.png" alt="Car Toy Caravan">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Car_Toy_-_Diesel.png" alt="Car Toy Diesel">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Car_Toy_-_Fury.png" alt="Car Toy Fury">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Car_Toy_-_Lagoon.png" alt="Car Toy Lagoon">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Car_Toy_-_Megan.png" alt="Car Toy Megan">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Car_Toy_-_Stranger.png" alt="Car Toy Stranger">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Car_Toy_-_Thunder.png" alt="Car Toy Thunder">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Car_Toy_-_Zegato.png" alt="Car Toy Zegato">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Chainsaw_Buddy_Bag.png" alt="Chainsaw Buddy Bag">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dead_Air_Pyro_Blast_Cup.png" alt="Dead Air Pyro Blast Cup">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Ammo_Box.png" alt="Dragon Den Ammo Box">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Cooler.png" alt="Dragon Den Cooler">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Helmet_x37.png" alt="Dragon Den Helmet x37">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Helmet_x93_(Blue).png" alt="Dragon Den Helmet x93 Blue">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Helmet_x93_(Cyan).png" alt="Dragon Den Helmet x93 Cyan">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Helmet_x93_(Green).png" alt="Dragon Den Helmet x93 Green">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Helmet_x93_(Lime).png" alt="Dragon Den Helmet x93 Lime">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Helmet_x93_(Orange).png" alt="Dragon Den Helmet x93 Orange">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Helmet_x93_(Pink).png" alt="Dragon Den Helmet x93 Pink">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Helmet_x93_(Purple).png" alt="Dragon Den Helmet x93 Purple">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Helmet_x93_(Red).png" alt="Dragon Den Helmet x93 Red">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Helmet_x93_(White).png" alt="Dragon Den Helmet x93 White">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Helmet_x93_(Yellow).png" alt="Dragon Den Helmet x93 Yellow">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Red_Dot_Sight.png" alt="Dragon Den Red Dot Sight">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_S_I_C_C_Pouch.png" alt="Dragon Den SICC Pouch">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Sports_(Blue).png" alt="Dragon Den Sports Blue">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Sports_(Cyan).png" alt="Dragon Den Sports Cyan">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Sports_(Green).png" alt="Dragon Den Sports Green">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Sports_(Grey).png" alt="Dragon Den Sports Grey">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Sports_(Lime).png" alt="Dragon Den Sports Lime">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Sports_(Pink).png" alt="Dragon Den Sports Pink">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Sports_(Purple).png" alt="Dragon Den Sports Purple">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_Den_Sports_(Yellow).png" alt="Dragon Den Sports Yellow">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_IV_Silencer_(Blue).png" alt="Dragon IV Silencer Blue">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Dragon_IV_Silencer_(Purple).png" alt="Dragon IV Silencer Purple">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Fake_Bitcoin.png" alt="Fake Bitcoin">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Gengar_Backpack.png" alt="Gengar Backpack">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Hello_Kitty_Backpack_(Black).png" alt="Hello Kitty Backpack Black">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Hello_Kitty_Backpack_(Blue).png" alt="Hello Kitty Backpack Blue">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Hello_Kitty_Backpack_(Grey-Pink).png" alt="Hello Kitty Backpack Grey Pink">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Hello_Kitty_Backpack_(Grey-Red).png" alt="Hello Kitty Backpack Grey Red">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Hello_Kitty_Backpack_(Pink).png" alt="Hello Kitty Backpack Pink">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Hello_Kitty_Backpack_(White).png" alt="Hello Kitty Backpack White">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Hello_Kitty_Backpack_(Yellow).png" alt="Hello Kitty Backpack Yellow">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Kitty_Mask_(Black).png" alt="Kawaii Kitty Mask Black">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Kitty_Mask_(Blue).png" alt="Kawaii Kitty Mask Blue">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Kitty_Mask_(Cyan).png" alt="Kawaii Kitty Mask Cyan">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Kitty_Mask_(Green).png" alt="Kawaii Kitty Mask Green">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Kitty_Mask_(Lime).png" alt="Kawaii Kitty Mask Lime">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Kitty_Mask_(Orange).png" alt="Kawaii Kitty Mask Orange">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Kitty_Mask_(Pink).png" alt="Kawaii Kitty Mask Pink">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Kitty_Mask_(Purple).png" alt="Kawaii Kitty Mask Purple">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Kitty_Mask_(Red).png" alt="Kawaii Kitty Mask Red">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Kitty_Mask_(White).png" alt="Kawaii Kitty Mask White">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Kitty_Mask_(Yellow).png" alt="Kawaii Kitty Mask Yellow">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Leopard_Backpack_(Blue).png" alt="Kawaii Leopard Backpack Blue">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Leopard_Backpack_(Orange).png" alt="Kawaii Leopard Backpack Orange">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Leopard_Backpack_(Red).png" alt="Kawaii Leopard Backpack Red">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Leopard_Backpack_(White).png" alt="Kawaii Leopard Backpack White">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Tiger_Backpack_(Green).png" alt="Kawaii Tiger Backpack Green">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Tiger_Backpack_(Orange).png" alt="Kawaii Tiger Backpack Orange">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Tiger_Backpack_(Purple).png" alt="Kawaii Tiger Backpack Purple">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Kawaii_Tiger_Backpack_(White).png" alt="Kawaii Tiger Backpack White">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Metal_Fuel_Can_(Blue).png" alt="Metal Fuel Can Blue">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Metal_Fuel_Can_(Green).png" alt="Metal Fuel Can Green">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Metal_Fuel_Can_(Red).png" alt="Metal Fuel Can Red">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Nikita_Glasses_(Dragon_Den_Edition).png" alt="Nikita Glasses Dragon Den Edition">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Plushie_-_Bear_Teef.png" alt="Plushie Bear Teef">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Plushie_-_Gas_Mask_Bear.png" alt="Plushie Gas Mask Bear">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Plushie_-_LSD_Bunny.png" alt="Plushie LSD Bunny">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Plushie_-_Overstuffed_Bear.png" alt="Plushie Overstuffed Bear">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Plushie_-_Voodoo_Bunny.png" alt="Plushie Voodoo Bunny">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Secure_Container_Cerberus.png" alt="Secure Container Cerberus">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Secure_Container_Kronos.png" alt="Secure Container Kronos">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Strike_Industries_Modular_Viper_(Black).png" alt="Strike Industries Modular Viper Black">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Strike_Industries_Modular_Viper_(Tan).png" alt="Strike Industries Modular Viper Tan">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/Sunda_MK2_Grip.png" alt="Sunda MK2 Grip">
+                <img src="https://raw.githubusercontent.com/Drexira/DragonDen-Euphoria/refs/heads/SPT-3.11/Showcase/UTG_Combat_D_Grip.png" alt="UTG Combat D Grip">
+            </div>
+            <p><i>Image quality is not ideal</i></p>
+        </details>
+
+        <h3>Quests</h3>
+        <ul>
+            <li><b>• Therapist intro</b> - Whispers Through Shattered Glass. In Terragroup building next to Mechanic locked door, on the butchering table seen in quest image.</li>
+            <li><b>• Mechanic follow up</b> - Vapor Substitute after Bad Habit</li>
+            <li><b>• Euphoria storyline</b> - 50 quests in a single linear chain with some side quests</li>
+        </ul>
+    </div>
+
+    <!-- Weights and Raid Timer -->
+    <div id="weightsraidtimer" class="content-section" style="display:none">
+        <h2 onclick="showContent('weightsraidtimer')">Dragon Den - Weights and Raid Timer</h2>
+
+        <h4>What it does</h4>
+        <ul>
+            <li>• Change raid time per map</li>
+            <li>• Change item weight with global, per parent, or per item rules</li>
+            <li>• Optional whitelist and blacklist to target specific items</li>
+        </ul>
+
+        <h3>Features</h3>
+        <h4>Raid Time</h4>
+        <ul>
+            <li>• Set minutes per map.</li>
+        </ul>
+
+        <h4>Weight Changer</h4>
+        <ul>
+            <li>• Global percent applies to all items when no other match</li>
+            <li>• Per parent percent by item parent id or parent name</li>
+            <li>• Per item percent by exact item id or name</li>
+            <li>• Whitelist limits edits to listed items</li>
+            <li>• Blacklist excludes specific items and overrides all</li>
+        </ul>
+
+        <h4>Rule priority</h4>
+        <ul>
+            <li>• Per item over per parent</li>
+            <li>• Per parent over global</li>
+            <li>• Blacklist over everything</li>
+        </ul>
+
+        <h3>How to Use</h3>
+        <h4>Edit the config in <code>DragonDen-WeightsAndRaidTimer/config</code>. The config contains comments.</h4>
+        <ul>
+            <li>• Toggle features on or off</li>
+            <li>• Set minutes per map for raid length</li>
+            <li>• Set weight percents</li>
+            <li>• Add parent ids or names for category edits</li>
+            <li>• Add specific item ids or names for overrides</li>
+            <li>• Use the whitelist to restrict edits only to listed items</li>
+            <li>• Use the blacklist to protect items from any change</li>
+        </ul>
+
+        <h3>Compatibility</h3>
+        <ul>
+            <li>• Can be used with SVM but should be loaded after it and not using the same settings</li>
+            <li>• Load after all mods that add items or change raid settings</li>
+        </ul>
+    </div>
+
+    <!-- The Zone Maker Content -->
+    <div id="thezonemaker" class="content-section">
+        <h2 onclick="showContent('thezonemaker')">The Zone Maker</h2>
+        <p>
+            <b>The Zone Maker</b> is a robust tool for <em>SPT mod developers</em> to create, configure, and manage custom zones for VCQL, Loose Loot, and other mods with advanced settings and ease.
+        </p>
+
+        <h4>Download Link Coming Soon...</h4>
+        <!--<a href="TO BE ADDED" target="_blank"><h3>Download the Mod Here</h3></a>-->
+
+        <h2>Overview</h2>
+        <h1>
+            <b><span style="color:#157aa6;">The Zone Maker</span></b>
+        </h1>
+        <p>The Zone Maker is an all-in-one tool designed for mod developers working with <em>SPT</em>. It simplifies the process of creating and configuring custom zones for VCQL, Loose Loot, and world-building.</p>
+        <p>With advanced configuration options, real-time adjustments, and intuitive tools, this mod allows you to quickly create, edit, and manage zones for testing.</p>
+        <p>Whether you're building custom maps, adding loot zones, or managing world data, The Zone Maker provides everything you need to streamline your workflow and enhance your creations.</p>
+        <h3><span style="color:#008000;">Key Features:</span></h3>
+        <ul>
+            <li><b>• Dynamic Zone Customization:</b> Adjust Zone Cube properties like position, rotation, scale, and transparency in real-time.</li>
+            <li><b>• LooseLoot Generation:</b> Create custom loot zones with configurable probabilities, gravity effects, and randomization.</li>
+            <li><b>• VCQL Zone Integration:</b> Generate VCQL-compatible zones with specified IDs, names, and types.</li>
+            <li><b>• Dragon Den - Quest Immersion:</b> Save and manage data for world-building, including map locations and categories.</li>
+            <li><b>• Custom Keyboard Shortcuts:</b> Quickly transform, scale, and rotate Zone Cubes with configurable hotkeys.</li>
+        </ul>
+
+
+        <h2>Detailed Configurations</h2>
+
+        <h3>Zone Information</h3>
+        <ul>
+            <li><b>• Current Zone Cube Position:</b> Displays the current Zone Cube's position (read-only).</li>
+            <li><b>• Current Zone Cube Rotation:</b> Displays the current Zone Cube's rotation (read-only).</li>
+            <li><b>• Current Zone Cube Scale:</b> Displays the current Zone Cube's scale (read-only).</li>
+            <li><b>• Current Map Name:</b> Shows the ID of the current map (read-only).</li>
+            <li><b>• Zone Cube Transparency:</b> Adjust transparency of the Zone Cube (range: 0.0 to 1.0).</li>
+        </ul>
+
+        <h3>Zone Box Settings</h3>
+        <ul>
+            <li><b>• Cube Prefab:</b> Select the prefab for the Zone Cube to use custom bundles for better representation.</li>
+            <li><b>• Transform Speed:</b> Set the speed of Zone Cube transformations (range: 0.01 to 10).</li>
+            <li><b>• Generate Zone Cube:</b> Creates a Zone Cube at the look position or player's feet.</li>
+            <li><b>• Remove Zone Cube:</b> Removes the currently selected Zone Cube.</li>
+            <li><b>• Spawn Zone Cube at Looking Position:</b> Toggle between spawning Zone Cubes at the look position or player’s feet.</li>
+            <li><b>• Transform Keys:</b> Keyboard shortcuts for transforming the Zone Cube along X, Y, and Z axes.</li>
+            <li><b>• Mode Keys:</b> Switch between Position, Scale, and Rotation modes.</li>
+            <li><b>• Lock X and Z Rotation Axes:</b> Enables or disables locking X and Z axes during rotation.</li>
+            <li><b>• Default Scale:</b> Sets the default scale for new Zone Cubes.</li>
+            <li><b>• Position Offset:</b> Define an offset for spawning Zone Cubes relative to the look position.</li>
+        </ul>
+
+        <h3>VCQL Zone Settings</h3>
+        <ul>
+            <li><b>• Zone Id:</b> Identifier for the zone (spaces replaced with underscores).</li>
+            <li><b>• Zone Name:</b> Name of the zone (spaces replaced with underscores).</li>
+            <li><b>• Zone Type:</b> Set the zone type (e.g., placeitem).</li>
+            <li><b>• Flare Type:</b> Define flare effects for the zone.</li>
+            <li><b>• Generate VCQL Zone:</b> Save the zone settings to the VCQL Zone folder.</li>
+        </ul>
+
+        <h3>LooseLoot Settings</h3>
+        <ul>
+            <li><b>• Probability:</b> Adjust spawn probability for LooseLoot (range: 0.0 to 1.0).</li>
+            <li><b>• Use Gravity:</b> Enable or disable gravity for LooseLoot.</li>
+            <li><b>• Random Rotation:</b> Enable or disable random rotation for LooseLoot.</li>
+            <li><b>• Item Id (tpl):</b> Specify the template ID for LooseLoot items.</li>
+            <li><b>• Generate Loose Loot:</b> Save LooseLoot data to the "_EXPORTED_LOOT_" folder.</li>
+        </ul>
+
+        <h3>Map Locations</h3>
+        <ul>
+            <li><b>• Add Map Location to List:</b> Hotkey to add the current Zone Cube location to a list.</li>
+            <li><b>• Remove Last Map Location from List:</b> Hotkey to remove the last Zone Cube location from the list.</li>
+            <li><b>• Spawn Map Location Cubes:</b> Load and display map location cubes from a saved list.</li>
+            <li><b>• Remove Map Location Cubes:</b> Remove all displayed Map Location Cubes from the map.</li>
+            <li><b>• Generate Map Locations File:</b> Save the Map Locations list to a file for reuse or sharing.</li>
+        </ul>
+
+        <h3>Dragon Den - Quest Immersion</h3>
+        <ul>
+            <li><b>• File Name:</b> Set the name for the Dragon Den - Quest Immersion save file.</li>
+            <li><b>• Category:</b> Define a category for organizing Dragon Den - Quest Immersion data.</li>
+            <li><b>• Generate Dragon Den - Quest Immersion File:</b> Save the Dragon Den - Quest Immersion data to a custom folder.</li>
+        </ul>
+
+        <h2>Showcase</h2>
+        <img src="https://i.imgur.com/fYkKNOL.gif" alt="fYkKNOL.gif">
+
+        <h2>Known Issues</h2>
+        <ul>
+            <li>• Custom keyboard shortcuts may conflict with other mods.</li>
+        </ul>
+        <p>If you encounter an issue, report it on <a href="https://github.com/Drexira/DragonDen-TheZoneMaker/issues">GitHub</a>.</p>
+
+        <h2>Disclaimer</h2>
+        <ul>
+            <li>• This mod is under active development; features may change or be added.</li>
+            <li>• The mod is provided "as-is".</li>
+        </ul>
+        <p>Enjoy and use responsibly!</p>
+    </div>
+
+    <!-- Quest Immersion Content -->
+    <div id="questimmersion" class="content-section">
+        <h2>Dragon Den - Quest Immersion Documentation</h2>
+
+        <h3>Overview</h3>
+        <p><b>Dragon Den - Quest Immersion</b> is a mod designed for <b>SPT mod developers</b> to create immersive, interactive environments by spawning custom objects in the game world. It supports advanced features like integrating objects with quest progression, ensuring seamless gameplay enhancements. The mod simplifies world-building and enhances customization.</p>
+        <p>
+            Whether you're creating dynamic quest locations, adding hidden treasures, spawning PMCs, scavs, bosses or customizing the environment with unique objects, Dragon Den - Quest Immersion provides the tools you need to bring your vision to life.
+        </p>
+        <h4>Download Link Coming Soon...</h4>
+        <!--<a href="TO BE ADDED" target="_blank"><h3>Download the Mod Here</h3></a>-->
+
+        <!--<h2>Showcase Examples</h2>
+        <ul>
+            <li>The mod comes with a variety of example spawns to showcase its capabilities. These include:</li>
+            <ul>
+                <li><b>Factory Day Time:</b> Will have 35 locations with 98 Posters, it will randomize which poster will spawn in each location.</li>
+                <li><b>Woods:</b> Will have 29 locations with 98 Posters, it will only spawn if you are on the quest <code>The Survivalist Path - Tough Guy</code> and it's <code>AvailableForFinish</code> or <code>Success</code></li>
+            </ul>
+            <li>These examples demonstrate how objects can be spawned based on quest status and map locations.</li>
+            <li>If you want to make Addons for the mod, you can follow the guide below.</li>
+            <li>You can also use the <a href="#thezonemaker">The Zone Maker</a> to fetch the positions for the objects.</li>
+        </ul>-->
+
+        <h2>Features</h2>
+        <h3>Object Spawning</h3>
+        <ul>
+            <li><b>• Spawn Objects in the World:</b> Load and spawn custom objects dynamically based on pre-configured map locations.</li>
+            <li><b>• Randomized Placement:</b> Objects are positioned randomly within defined areas for variability. (when applicable)</li>
+            <li><b>• Remove Objects:</b> Easily remove objects from the world when quests change status.</li>
+        </ul>
+
+        <h3>Quest Integration</h3>
+        <ul>
+            <li><b>• Quest-Based Locking:</b> Lock specific objects behind quest progression to add depth to gameplay.</li>
+            <li><b>• Real-Time Quest Monitoring:</b> Automatically track and respond to quest status changes.</li>
+        </ul>
+
+        <h3>Data Management</h3>
+        <ul>
+            <li><b>• Map Location Files:</b> Load predefined map location configurations from JSON files.</li>
+            <li><b>• Custom Categories:</b> Organize objects into categories for efficient spawning and removal.</li>
+        </ul>
+
+        <h3>Debugging and Customization</h3>
+        <ul>
+            <li><b>• Debug Mode:</b> Enable verbose logging for detailed insights into mod behavior.</li>
+            <li><b>• Flexible Update Intervals:</b> Configure how often the mod checks for quest status changes.</li>
+        </ul>
+
+        <h2>How It Works</h2>
+        <ol>
+            <li><b>Initialize the Mod:</b> The mod starts by identifying the map and loading corresponding configuration files.</li>
+            <li><b>Load Bundles:</b> Asset bundles for objects are loaded dynamically from specified directories.</li>
+            <li><b>Quest Checks:</b> If quests are active, the mod ensures objects are only spawned when the quests are in a valid status.</li>
+            <li><b>Spawn Objects:</b> Objects are instantiated at predefined locations with randomization for variety (if applicable).</li>
+            <li><b>Monitor Changes:</b> Quest statuses are monitored, and objects are spawned or removed accordingly.</li>
+        </ol>
+
+        <h2>Create Addons for Dragon Den - Quest Immersion</h2>
+
+        <h3>Before You Begin</h3>
+        <p>Before creating addons for Dragon Den - Quest Immersion you should have a basic understanding of Unity, asset bundles, and JSON file formats. You should also be familiar with The Zone Maker mod for fetching object positions.</p>
+
+        <p>Follow the steps below to create custom addons for Dragon Den - Quest Immersion:</p>
+
+        <h3>Step 1: Add Your Bundles</h3>
+        <ol>
+            <li>Navigate to the folder: <code>BepInEx/plugins/DragonDenQuestImmersion/Bundles/</code>.</li>
+            <li>Create a new folder for your category (e.g., <b>MyNewCategory</b>).</li>
+            <li>Place your <code>.bundle</code> files inside the folder (e.g., <code>poster1.bundle</code>, <code>poster2.bundle</code>).</li>
+        </ol>
+
+        <h3>Step 2: Create MyNewCategory.json</h3>
+        <ol>
+            <li>Navigate to the folder: <code>BepInEx/plugins/DragonDenQuestImmersion/MapLocations/</code>.</li>
+            <li>Open the folder of the map you want to add objects to.</li>
+            <li>Create <code>MyNewCategory.json</code> file.</li>
+            <li>Add your category to the desired map using the structure below</li>
+            <li>Then save the file and restart the client. Your objects will now spawn in the specified map and positions.</li>
+        </ol>
+<code-block title="Category Json File Example" language="javascript">
+    [
+        "Category": "Posters",
+        "Positions": [
+            {
+                "Position": {
+                    "x": -31.82145,
+                    "y": 2.76337886,
+                    "z": 34.09983
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 271.796234,
+                    "z": 0.0
+                }
+            }
+        ]
+    ]
+</code-block>
+        <h3>Step 2.5: Fetching the positions</h3>
+        <p>For fetching the positions, i will refer you to the <a href="#thezonemaker">The Zone Maker</a> mod.</p>
+        <p>It will help you understand how to add positions and categories to the json file.</p>
+        <p>After you have the positions, you can add them to the json file, or use the file as it is generated.</p>
+
+        <h3>Step 3: Optional - Lock Objects Behind Quests</h3>
+        <p>You can lock objects behind quests by specifying a quest ID and status.</p>
+        <p>For example, the below configuration will only spawn the posters if the quest <code>The Survivalist Path - Tough Guy</code> is started.</p>
+<code-block title="Locking Objects behind Quests (optional)" language="javascript">
+[
+    {
+        "Category": "Posters",
+        "IsForQuest": true,
+        "Quests": [
+            {
+                "QuestId": "5d25cf2686f77443e75488d4",
+                "QuestStatus": [
+                    "Started"
+                ]
+            }
+        ],
+        "Positions": [
+            {
+            "Position": {
+                "x": 21.4039536,
+                "y": 5.159445,
+                "z": -109.309143
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 271.796234,
+                "z": 0.0
+            }
+        ]
+    }
+]
+</code-block>
+
+        <h3>Preparing the Mod for Release</h3>
+        <ol>
+            <li>Ensure all asset bundles and map location files are correctly placed.</li>
+            <li>Test the mod in-game to verify object spawning and quest integration.</li>
+            <li>Package the mod files into a 7z archive for distribution.</li>
+            <ul>
+                <li>Include the <code>Bundles</code> and <code>MapLocations</code> folders that are yours only.</li>
+                <ul>
+                    <li>Folder <code>BepInEx/plugins/DragonDenQuestImmersion/</code> should be path in your zipped folder.</li>
+                </ul>
+                <li>Include any additional documentation or instructions for users for the Forge Page.</li>
+                <li>Provide information that they must use DragonDen-QuestImmersion for the Objects to spawn.</li>
+            </ul>
+            <li>Provide documentation and instructions for users on how to install and use your addon with Dragon Den - Quest Immersion.</li>
+        </ol>
+        <b><span style="color:#c00000;">Do NOT include the <code>Drexira.DragonDen_QuestImmersion.dll</code> file in your release.</span></b>
+
+        <h2>Additional Information</h2>
+        <h3>Quest Status Names and Numbers (use names in json for QuestStatus)</h3>
+        <ul>
+            <li><b>Locked:</b> 0</li>
+            <li><b>AvailableForStart:</b> 1</li>
+            <li><b>Started:</b> 2</li>
+            <li><b>AvailableForFinish:</b> 3</li>
+            <li><b>Success:</b> 4</li>
+            <li><b>Fail:</b> 5</li>
+            <li><b>FailRestartable:</b> 6</li>
+            <li><b>MarkedAsFailed:</b> 7</li>
+            <li><b>Expired:</b> 8</li>
+            <li><b>AvailableAfter:</b> 9</li>
+        </ul>
+
+        <h3>Map Names and Their IDs (left is for map folders)</h3>
+        <ul>
+            <li><code>Interchange</code> Map ID: <code>Interchange</code></li>
+            <li><code>FactoryDay</code> Map ID: <code>factory4_day</code></li>
+            <li><code>FactoryNight</code> Map ID: <code>factory4_night</code></li>
+            <li><code>Customs</code> Map ID: <code>bigmap</code></li>
+            <li><code>Woods</code> Map ID: <code>Woods</code></li>
+            <li><code>Lighthouse</code> Map ID: <code>Lighthouse</code></li>
+            <li><code>Shoreline</code> Map ID: <code>Shoreline</code></li>
+            <li><code>Reserve</code> Map ID: <code>RezervBase</code></li>
+            <li><code>Laboratory</code> Map ID: <code>laboratory</code></li>
+            <li><code>StreetsOfTarkov</code> Map ID: <code>TarkovStreets</code></li>
+            <li><code>GroundZero</code> Map ID: <code>Sandbox</code></li>
+            <li><code>GroundZero21+</code> Map ID: <code>Sandbox_high</code></li>
+        </ul>
+
+        <h2>Known Issues</h2>
+        <ul>
+            <li>Objects might not spawn if the map location files are missing or not formatted correctly (see readme file).</li>
+        </ul>
+
+        <h2>Contributing</h2>
+        <p>If you want to contribute or report issues, visit the <a href="https://github.com/Drexira/DragonDen-TheZoneMaker" target="_blank">GitHub repository</a>.</p>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+    const API_BASE = 'https://forge.sp-tarkov.com/api/v0';
+    const API_KEY  = 'Z3Eh01aWyCHtvfHtZ8qYUDL6NmmHBRc0Kw9G0wAP9af00640';
+
+    const OWN_MOD_IDS   = [2330, 2304, 2335];  // Euphoria, Neon Signs, Weights & Raid Times
+    const HELPED_MOD_IDS= [2308];              // Poster's Galore - MrPenguin5292
+    const FIELDS = 'id,name,slug,teaser,thumbnail,detail_url,downloads,featured,updated_at';
+    
+    const body = document.body;
+    const btn = document.getElementById('sidebarCollapseBtn');
+    const hotzone = document.getElementById('sidebarHotzone');
+    const KEY = 'sidebar-collapsed';
+    const DKEY = 'pref-dyslexic';
+    
+    function openURL(url) {
+        if (url === 'dragondenmods')
+            window.open('/dragondenmods');
+    }
+
+    class CodeBlock extends HTMLElement {
+        connectedCallback() {
+            const title = this.getAttribute('title') || 'Code Example';
+            const language = this.getAttribute('language') || 'plaintext';
+            const code = this.innerHTML.trim();
+
+            this.innerHTML = `
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="code-title">${title}</span>
+                        <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+                    </div>
+                    <pre class="code-block">
+<code class="language-${language}">
+${code}
+</code>
+                    </pre>
+                </div>
+            `;
+        }
+    }
+
+    customElements.define('code-block', CodeBlock);
+ 
+    function showContent(sectionId) {
+        const searchInput = document.getElementById('search');
+        searchInput.value = '';
+
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(s => {
+            s.classList.remove('active', 'fade-in', 'with-border');
+            s.style.display = 'none';
+            clearHighlights(s);
+        });
+
+        document.querySelectorAll('#sidebar li').forEach(li => li.classList.remove('active'));
+        const match = Array.from(document.querySelectorAll('#sidebar li'))
+            .find(li => li.getAttribute('onclick') === `showContent('${sectionId}')`);
+        if (match) match.classList.add('active');
+
+        const selectedSection = document.getElementById(sectionId);
+        if (selectedSection) {
+            selectedSection.style.display = 'block';
+            setTimeout(() => selectedSection.classList.add('fade-in', 'active'), 50);
+            selectedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            window.location.hash = sectionId;
+
+            /* NEW: lazy-load mods once */
+            if (sectionId === 'mods' && !window.__modsLoaded){
+                window.__modsLoaded = true;
+                initMods();
+            }
+        }
+    }
+
+    function filterContent() {
+        const searchTerm = document.getElementById('search').value.toLowerCase();
+        const sections = document.querySelectorAll('.content-section');
+
+        if (!searchTerm.trim()) {
+            sections.forEach(section => {
+                section.style.display = 'none';
+                section.classList.remove('with-border');
+                clearHighlights(section);
+            });
+
+            const currentHash = window.location.hash.substring(1) || 'home';
+            const currentSection = document.getElementById(currentHash);
+            if (currentSection) {
+                currentSection.style.display = 'block';
+            }
+            return;
+        }
+
+        sections.forEach(section => {
+            const text = section.innerText.toLowerCase();
+            clearHighlights(section);
+
+            if (text.includes(searchTerm)) {
+                section.style.display = 'block';
+                section.classList.add('with-border');
+                section.classList.add('fade-in');
+                highlightText(section, searchTerm);
+            } else {
+                section.style.display = 'none';
+                section.classList.remove('with-border');
+            }
+        });
+    }
+
+    function highlightText(section, term) {
+        section.normalize();
+        const regex = new RegExp(`(${term})`, 'gi');
+        const textNodes = getTextNodes(section);
+
+        textNodes.forEach(node => {
+            const parent = node.parentNode;
+            if (parent) {
+                const originalText = node.nodeValue;
+                console.log(`Node Value Before Highlight: "${originalText}"`);
+
+                const highlightedHTML = originalText.replace(regex, '<mark>$1</mark>');
+                console.log(`Highlighted HTML: "${highlightedHTML}"`);
+
+                const tempContainer = document.createElement('span');
+                tempContainer.innerHTML = highlightedHTML;
+
+                while (tempContainer.firstChild) {
+                    parent.insertBefore(tempContainer.firstChild, node);
+                }
+                parent.removeChild(node);
+            }
+        });
+    }
+
+    function clearHighlights(section) {
+        const marks = section.querySelectorAll('mark');
+        marks.forEach(mark => {
+            const parent = mark.parentNode;
+            parent.replaceChild(document.createTextNode(mark.textContent), mark);
+        });
+    }
+
+    function getTextNodes(element) {
+        const walker = document.createTreeWalker(
+            element,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode: (node) => {
+                    const parentTag = node.parentNode.tagName;
+                    if (
+                        
+                        parentTag !== 'PRE' &&
+                        node.nodeValue.trim() !== ''
+                    ) {
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                    return NodeFilter.FILTER_REJECT;
+                },
+            },
+            false
+        );
+
+        const nodes = [];
+        while (walker.nextNode()) {
+            nodes.push(walker.currentNode);
+        }
+        return nodes;
+    }
+
+    function copyCode(button) {
+        const codeBlock = button.closest('.code-container').querySelector('code');
+        const textToCopy = codeBlock.innerText;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            button.innerText = 'Copied!';
+            setTimeout(() => (button.innerText = 'Copy Code'), 2000);
+        }).catch(err => {
+            console.error('Failed to copy code: ', err);
+        });
+    }
+    
+    function apply(collapsed){
+        body.classList.toggle('sidebar-collapsed', collapsed);
+        localStorage.setItem(KEY, collapsed ? '1' : '0');
+        if (btn){
+            btn.setAttribute('aria-label', collapsed ? 'Show sidebar' : 'Hide sidebar');
+            btn.title = collapsed ? 'Show sidebar' : 'Hide sidebar';
+            btn.setAttribute('aria-expanded', (!collapsed).toString());
+            btn.textContent = collapsed ? '→' : '←';
+        }
+    }
+
+    apply(localStorage.getItem(KEY) === '1');
+
+    if (btn){
+        btn.addEventListener('click', () => apply(!body.classList.contains('sidebar-collapsed')));
+        btn.setAttribute('aria-expanded', (!body.classList.contains('sidebar-collapsed')).toString());
+    }
+
+    if (hotzone){
+        hotzone.addEventListener('mouseenter', () => {
+            if (body.classList.contains('sidebar-collapsed')) body.classList.add('sidebar-peek');
+        });
+        hotzone.addEventListener('mouseleave', () => body.classList.remove('sidebar-peek'));
+        hotzone.addEventListener('click', () => {
+            apply(false);               // open fully
+            body.classList.remove('sidebar-peek');
+        });
+    }
+
+    async function getMods(ids){
+        if (!ids?.length) return [];
+        const qs = new URLSearchParams();
+        qs.set('fields', FIELDS);
+        qs.set('filter[id]', ids.join(','));
+        const r = await fetch(`${API_BASE}/mods?${qs.toString()}`, {
+            headers: { Authorization: `Bearer ${API_KEY}`, Accept: 'application/json' }
+        });
+        const body = await r.json().catch(() => null);
+        if (!r.ok || !body || !body.success) return [];
+        return Array.isArray(body.data) ? body.data : [];
+    }
+    
+    function buildIconCandidates(mod){
+        const api = [];
+        if (mod.thumbnail && mod.thumbnail.trim()){
+            try { api.push(new URL(mod.thumbnail, 'https://forge-static.sp-tarkov.com').href) } catch {}
+        }
+        return [...api];
+    }
+    
+    function modCard(m){
+        const a = document.createElement('a');
+        a.className = 'mod-item';
+        a.href = m.detail_url || '#';
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.style.textDecoration = 'none';
+        a.style.color = 'inherit';
+
+        const img = document.createElement('img');
+        img.alt = m.name || 'Mod';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.width = 100; img.height = 100;
+
+        const candidates = buildIconCandidates(m);
+        let i = 0;
+        const tryNext = () => { if (i < candidates.length){ img.src = candidates[i++]; } };
+        img.onerror = () => { img.onerror = null; img.onerror = tryNext; tryNext(); };
+        tryNext();
+
+        const info = document.createElement('div');
+        info.className = 'mod-info';
+        const h2 = document.createElement('h2'); h2.textContent = m.name || 'Untitled Mod';
+        const p  = document.createElement('p');  p.textContent  = m.teaser || '';
+
+        const meta = document.createElement('div');
+        meta.className = 'mod-meta';
+        meta.style.opacity = '0.9';
+        meta.style.fontSize = '0.92em';
+        const bits = [];
+        if (typeof m.downloads === 'number') bits.push(`${m.downloads.toLocaleString()} downloads`);
+        if (m.featured) bits.push('Featured');
+        if (m.updated_at) bits.push("Updated " + new Date(m.updated_at).toLocaleDateString());
+        meta.textContent = bits.join(' • ');
+
+        info.append(h2, p, meta);
+        a.append(img, info);
+        return a;
+    }
+    
+    async function loadMods(ids, container, extraClass){
+        const mods = await getMods(ids);
+        mods.sort((a,b) => ids.indexOf(a.id) - ids.indexOf(b.id));
+        for (const m of mods){
+            const el = modCard(m);
+            if (extraClass) el.classList.add(extraClass);
+            container.append(el);
+        }
+    }
+    
+    async function initMods(){
+        const ownList = document.getElementById('mods-own');
+        const helpedList = document.getElementById('mods-helped');
+        if (ownList && OWN_MOD_IDS.length) await loadMods(OWN_MOD_IDS,   ownList);
+        if (helpedList && HELPED_MOD_IDS.length) await loadMods(HELPED_MOD_IDS, helpedList, 'helped');
+    }
+
+    function applyDyslexic(on){
+        document.documentElement.classList.toggle('dyslexic', !!on);
+        localStorage.setItem(DKEY, on ? '1' : '0');
+
+        const btn = document.getElementById('dyslexicToggle');
+        if (btn){
+            btn.setAttribute('aria-pressed', String(!!on));
+            btn.textContent = `Dyslexic font: ${on ? 'On' : 'Off'}`;
+            btn.title = `Toggle OpenDyslexic (Alt+D) — currently ${on ? 'On' : 'Off'}`;
+        }
+    }
+
+    const initial = localStorage.getItem(DKEY) === '1';
+    applyDyslexic(initial);
+    
+    document.addEventListener('click', (e) => {
+        if (e.target && e.target.id === 'dyslexicToggle'){
+            const on = !document.documentElement.classList.contains('dyslexic');
+            applyDyslexic(on);
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        const tag = document.activeElement?.tagName || '';
+        if (e.key.toLowerCase() === 's' && !/input|textarea/i.test(tag)) {
+            e.preventDefault();
+            apply(!body.classList.contains('sidebar-collapsed'));
+        }
+    });
+
+    window.onload = () => {
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            showContent(hash);
+        } else {
+            showContent('home');
+        }
+    };
+</script>
+</body>
+</html>
