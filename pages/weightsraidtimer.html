@@ -1,0 +1,52 @@
+﻿<section class="content-section scan">
+    <h2 onclick="showContent('weightsraidtimer')">
+        <span class="title-grad">Dragon Den - Weights and Raid Timer</span>
+    </h2>
+
+    <h4>What it does</h4>
+    <ul>
+        <li>• Change raid time per map</li>
+        <li>• Change item weight with global, per parent, or per item rules</li>
+        <li>• Optional whitelist and blacklist to target specific items</li>
+    </ul>
+    
+    <h3>Features</h3>
+    <h4>Raid Time</h4>
+    <ul>
+        <li>• Set minutes per map.</li>
+    </ul>
+
+    <h4>Weight Changer</h4>
+    <ul>
+        <li>• Global percent applies to all items when no other match</li>
+        <li>• Per parent percent by item parent id or parent name</li>
+        <li>• Per item percent by exact item id or name</li>
+        <li>• Whitelist limits edits to listed items</li>
+        <li>• Blacklist excludes specific items and overrides all</li>
+    </ul>
+
+    <h4>Rule priority</h4>
+    <ul>
+        <li>• Per item over per parent</li>
+        <li>• Per parent over global</li>
+        <li>• Blacklist over everything</li>
+    </ul>
+
+    <h3>How to Use</h3>
+    <h4>Edit the config in <code>DragonDen-WeightsAndRaidTimer/config</code>. The config contains comments.</h4>
+    <ul>
+        <li>• Toggle features on or off</li>
+        <li>• Set minutes per map for raid length</li>
+        <li>• Set weight percents</li>
+        <li>• Add parent ids or names for category edits</li>
+        <li>• Add specific item ids or names for overrides</li>
+        <li>• Use the whitelist to restrict edits only to listed items</li>
+        <li>• Use the blacklist to protect items from any change</li>
+    </ul>
+
+    <h3>Compatibility</h3>
+    <ul>
+        <li>• Can be used with SVM but should be loaded after it and not using the same settings</li>
+        <li>• Load after all mods that add items or change raid settings</li>
+    </ul>
+</section>

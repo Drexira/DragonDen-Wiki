@@ -1,0 +1,197 @@
+﻿<section class="content-section scan">
+    <h2>
+        <span class="title-grad">Dragon Den - Quest Immersion</span>
+    </h2>
+
+    <h3>Overview</h3>
+    <p><b>Dragon Den - Quest Immersion</b> is a mod designed for <b>SPT mod developers</b> to create immersive, interactive environments by spawning custom objects in the game world. It supports advanced features like integrating objects with quest progression, ensuring seamless gameplay enhancements. The mod simplifies world-building and enhances customization.</p>
+    <p>
+        Whether you're creating dynamic quest locations, adding hidden treasures, spawning PMCs, scavs, bosses or customizing the environment with unique objects, Dragon Den - Quest Immersion provides the tools you need to bring your vision to life.
+    </p>
+    <h4>Download Link Coming Soon...</h4>
+    <!--<a href="TO BE ADDED" target="_blank"><h3>Download the Mod Here</h3></a>-->
+
+    <!--<h2>Showcase Examples</h2>
+    <ul>
+        <li>The mod comes with a variety of example spawns to showcase its capabilities. These include:</li>
+        <ul>
+            <li><b>Factory Day Time:</b> Will have 35 locations with 98 Posters, it will randomize which poster will spawn in each location.</li>
+            <li><b>Woods:</b> Will have 29 locations with 98 Posters, it will only spawn if you are on the quest <code>The Survivalist Path - Tough Guy</code> and it's <code>AvailableForFinish</code> or <code>Success</code></li>
+        </ul>
+        <li>These examples demonstrate how objects can be spawned based on quest status and map locations.</li>
+        <li>If you want to make Addons for the mod, you can follow the guide below.</li>
+        <li>You can also use the <a href="#thezonemaker">The Zone Maker</a> to fetch the positions for the objects.</li>
+    </ul>-->
+
+    <h2>Features</h2>
+    <h3>Object Spawning</h3>
+    <ul>
+        <li><b>• Spawn Objects in the World:</b> Load and spawn custom objects dynamically based on pre-configured map locations.</li>
+        <li><b>• Randomized Placement:</b> Objects are positioned randomly within defined areas for variability. (when applicable)</li>
+        <li><b>• Remove Objects:</b> Easily remove objects from the world when quests change status.</li>
+    </ul>
+
+    <h3>Quest Integration</h3>
+    <ul>
+        <li><b>• Quest-Based Locking:</b> Lock specific objects behind quest progression to add depth to gameplay.</li>
+        <li><b>• Real-Time Quest Monitoring:</b> Automatically track and respond to quest status changes.</li>
+    </ul>
+
+    <h3>Data Management</h3>
+    <ul>
+        <li><b>• Map Location Files:</b> Load predefined map location configurations from JSON files.</li>
+        <li><b>• Custom Categories:</b> Organize objects into categories for efficient spawning and removal.</li>
+    </ul>
+
+    <h3>Debugging and Customization</h3>
+    <ul>
+        <li><b>• Debug Mode:</b> Enable verbose logging for detailed insights into mod behavior.</li>
+        <li><b>• Flexible Update Intervals:</b> Configure how often the mod checks for quest status changes.</li>
+    </ul>
+
+    <h2>How It Works</h2>
+    <ol>
+        <li><b>Initialize the Mod:</b> The mod starts by identifying the map and loading corresponding configuration files.</li>
+        <li><b>Load Bundles:</b> Asset bundles for objects are loaded dynamically from specified directories.</li>
+        <li><b>Quest Checks:</b> If quests are active, the mod ensures objects are only spawned when the quests are in a valid status.</li>
+        <li><b>Spawn Objects:</b> Objects are instantiated at predefined locations with randomization for variety (if applicable).</li>
+        <li><b>Monitor Changes:</b> Quest statuses are monitored, and objects are spawned or removed accordingly.</li>
+    </ol>
+
+    <h2>Create Addons for Dragon Den - Quest Immersion</h2>
+
+    <h3>Before You Begin</h3>
+    <p>Before creating addons for Dragon Den - Quest Immersion you should have a basic understanding of Unity, asset bundles, and JSON file formats. You should also be familiar with The Zone Maker mod for fetching object positions.</p>
+
+    <p>Follow the steps below to create custom addons for Dragon Den - Quest Immersion:</p>
+
+    <h3>Step 1: Add Your Bundles</h3>
+    <ol>
+        <li>Navigate to the folder: <code>BepInEx/plugins/DragonDenQuestImmersion/Bundles/</code>.</li>
+        <li>Create a new folder for your category (e.g., <b>MyNewCategory</b>).</li>
+        <li>Place your <code>.bundle</code> files inside the folder (e.g., <code>poster1.bundle</code>, <code>poster2.bundle</code>).</li>
+    </ol>
+
+    <h3>Step 2: Create MyNewCategory.json</h3>
+    <ol>
+        <li>Navigate to the folder: <code>BepInEx/plugins/DragonDenQuestImmersion/MapLocations/</code>.</li>
+        <li>Open the folder of the map you want to add objects to.</li>
+        <li>Create <code>MyNewCategory.json</code> file.</li>
+        <li>Add your category to the desired map using the structure below</li>
+        <li>Then save the file and restart the client. Your objects will now spawn in the specified map and positions.</li>
+    </ol>
+<code-block title="Category Json File Example" language="javascript">
+[
+    "Category": "Posters",
+    "Positions": [
+        {
+            "Position": {
+                "x": -31.82145,
+                "y": 2.76337886,
+                "z": 34.09983
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 271.796234,
+                "z": 0.0
+            }
+        }
+    ]
+]
+</code-block>
+    <h3>Step 2.5: Fetching the positions</h3>
+    <p>For fetching the positions, i will refer you to the <a href="#thezonemaker">The Zone Maker</a> mod.</p>
+    <p>It will help you understand how to add positions and categories to the json file.</p>
+    <p>After you have the positions, you can add them to the json file, or use the file as it is generated.</p>
+
+    <h3>Step 3: Optional - Lock Objects Behind Quests</h3>
+    <p>You can lock objects behind quests by specifying a quest ID and status.</p>
+    <p>For example, the below configuration will only spawn the posters if the quest <code>The Survivalist Path - Tough Guy</code> is started.</p>
+<code-block title="Locking Objects behind Quests (optional)" language="javascript">
+[
+    {
+        "Category": "Posters",
+        "IsForQuest": true,
+        "Quests": [
+            {
+                "QuestId": "5d25cf2686f77443e75488d4",
+                "QuestStatus": [
+                    "Started"
+                ]
+            }
+        ],
+        "Positions": [
+            {
+                "Position": {
+                    "x": 21.4039536,
+                    "y": 5.159445,
+                    "z": -109.309143
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 271.796234,
+                    "z": 0.0
+                }
+            }
+        ]
+    }
+]
+</code-block>
+
+    <h3>Preparing the Mod for Release</h3>
+    <ol>
+        <li>Ensure all asset bundles and map location files are correctly placed.</li>
+        <li>Test the mod in-game to verify object spawning and quest integration.</li>
+        <li>Package the mod files into a 7z archive for distribution.</li>
+        <ul>
+            <li>Include the <code>Bundles</code> and <code>MapLocations</code> folders that are yours only.</li>
+            <ul>
+                <li>Folder <code>BepInEx/plugins/DragonDenQuestImmersion/</code> should be path in your zipped folder.</li>
+            </ul>
+            <li>Include any additional documentation or instructions for users for the Forge Page.</li>
+            <li>Provide information that they must use DragonDen-QuestImmersion for the Objects to spawn.</li>
+        </ul>
+        <li>Provide documentation and instructions for users on how to install and use your addon with Dragon Den - Quest Immersion.</li>
+    </ol>
+    <b><span style="color:#c00000;">Do NOT include the <code>Drexira.DragonDen_QuestImmersion.dll</code> file in your release.</span></b>
+
+    <h2>Additional Information</h2>
+    <h3>Quest Status Names and Numbers (use names in json for QuestStatus)</h3>
+    <ul>
+        <li><b>Locked:</b> 0</li>
+        <li><b>AvailableForStart:</b> 1</li>
+        <li><b>Started:</b> 2</li>
+        <li><b>AvailableForFinish:</b> 3</li>
+        <li><b>Success:</b> 4</li>
+        <li><b>Fail:</b> 5</li>
+        <li><b>FailRestartable:</b> 6</li>
+        <li><b>MarkedAsFailed:</b> 7</li>
+        <li><b>Expired:</b> 8</li>
+        <li><b>AvailableAfter:</b> 9</li>
+    </ul>
+
+    <h3>Map Names and Their IDs (left is for map folders)</h3>
+    <ul>
+        <li><code>Interchange</code> Map ID: <code>Interchange</code></li>
+        <li><code>FactoryDay</code> Map ID: <code>factory4_day</code></li>
+        <li><code>FactoryNight</code> Map ID: <code>factory4_night</code></li>
+        <li><code>Customs</code> Map ID: <code>bigmap</code></li>
+        <li><code>Woods</code> Map ID: <code>Woods</code></li>
+        <li><code>Lighthouse</code> Map ID: <code>Lighthouse</code></li>
+        <li><code>Shoreline</code> Map ID: <code>Shoreline</code></li>
+        <li><code>Reserve</code> Map ID: <code>RezervBase</code></li>
+        <li><code>Laboratory</code> Map ID: <code>laboratory</code></li>
+        <li><code>StreetsOfTarkov</code> Map ID: <code>TarkovStreets</code></li>
+        <li><code>GroundZero</code> Map ID: <code>Sandbox</code></li>
+        <li><code>GroundZero21+</code> Map ID: <code>Sandbox_high</code></li>
+    </ul>
+
+    <h2>Known Issues</h2>
+    <ul>
+        <li>Objects might not spawn if the map location files are missing or not formatted correctly (see readme file).</li>
+    </ul>
+
+    <h2>Contributing</h2>
+    <p>If you want to contribute or report issues, visit the <a href="https://github.com/Drexira/DragonDen-TheZoneMaker" target="_blank">GitHub repository</a>.</p>
+</section>
+</div>
