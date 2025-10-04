@@ -1,0 +1,51 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Page not found • Dragon Den Wiki</title>
+    <script>
+        (function(){
+            var parts = location.pathname.split('/').filter(Boolean);
+            var base = '/' + (parts[0] || '') + '/';
+            var b = document.createElement('base');
+            b.href = base;
+            document.head.appendChild(b);
+            window.__DD_404_BASE = base;
+        })();
+    </script>
+    <link rel="icon" type="image/x-icon" href="res/favicon.ico">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <style>
+        body{display:grid;place-items:center;min-height:100vh;background:linear-gradient(135deg,rgba(22,26,30,.25),#0f1113)}
+        .card{max-width:640px;margin:24px;padding:26px 24px;border:1px solid var(--glass-border);border-radius:14px;background:var(--panel-grad);box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 1px 0 var(--glass-inner);text-align:center}
+        h1{margin:0 0 10px;font-size:34px;color:var(--brand)}
+        p{color:var(--muted)}
+        a.btn{display:inline-block;margin-top:14px;padding:10px 14px;border-radius:10px;border:1px solid var(--glass-border);background:var(--panel-grad);color:#fff;text-decoration:none;box-shadow:0 6px 16px rgba(0,0,0,.45)}
+        a.btn:hover{background:#1e2328;border-color:rgba(255,255,255,.25)}
+        .hint{margin-top:8px;font-size:.9rem;color:#8fa3b8}
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>404</h1>
+    <p>The bitcoins you're looking for is in another castle :-(</p>
+    <a class="btn" id="backHome" href="#">Go to Home</a>
+    <div class="hint" id="pathInfo"></div>
+</div>
+<script>
+    (function(){
+        var parts = location.pathname.split('/').filter(Boolean);
+        var base = window.__DD_404_BASE || ('/' + (parts[0]||'') + '/');
+        document.getElementById('pathInfo').textContent = 'Requested: ' + location.pathname;
+        document.getElementById('backHome').addEventListener('click',function(e){
+            e.preventDefault();
+            location.href = base;
+        });
+    })();
+</script>
+</body>
+</html>

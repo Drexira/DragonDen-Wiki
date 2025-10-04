@@ -4,21 +4,21 @@ const results = document.createElement('div');
 results.id = 'search-results';
 document.querySelector('.search-container')?.append(results);
 
+const BASE = window.__DD_BASE || ('/' + (location.pathname.split('/').filter(Boolean)[0] || ''));
+const toAbs = (p) => `${BASE}/${p.replace(/^\//,'')}`;
+
 const PAGES = [
-    { id: 'home', url: 'pages/home.html', title: 'Home' },
-    { id: 'about', url: 'pages/about.html', title: 'About Me' },
-    { id: 'mods', url: 'pages/mods.html', title: 'Dragon Den Mods' },
-    { id: 'euphoria', url: 'pages/euphoria.html', title: 'Dragon Den Euphoria' },
-    { id: 'weightsraidtimer', url: 'pages/weightsraidtimer.html', title: 'Weights and Raid Timer' },
-    { id: 'thezonemaker', url: 'pages/thezonemaker.html', title: 'The Zone Maker' },
-    { id: 'questimmersion', url: 'pages/questimmersion.html', title: 'Quest Immersion' }
+    { id: 'home',            url: toAbs('pages/home.html'),             title: 'Home' },
+    { id: 'about',           url: toAbs('about/index.html'),            title: 'About Me' },
+    { id: 'mods',            url: toAbs('mods/index.html'),             title: 'Dragon Den Mods' },
+    { id: 'euphoria',        url: toAbs('euphoria/index.html'),         title: 'Dragon Den Euphoria' },
+    { id: 'weightsraidtimer',url: toAbs('weightsraidtimer/index.html'), title: 'Weights and Raid Timer' },
+    { id: 'thezonemaker',    url: toAbs('thezonemaker/index.html'),     title: 'The Zone Maker' },
+    { id: 'questimmersion',  url: toAbs('questimmersion/index.html'),   title: 'Quest Immersion' }
 ];
 
 const INDEX = new Map();
 let LAST_TERM = sessionStorage.getItem('dd_last_search') || '';
-let reapplyTimer = 0;
-let LAST_HANDLED_HASH = '';
-let LAST_HANDLED_TS = 0;
 
 const norm = s => s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').toLowerCase().trim();
 function strip(html){
@@ -29,9 +29,12 @@ function strip(html){
 async function buildIndex(){
     await Promise.all(PAGES.map(async p => {
         if (INDEX.has(p.id)) return;
-        const r = await fetch(p.url, { cache: 'no-store' });
-        const html = await r.text();
-        INDEX.set(p.id, norm(strip(html)));
+        try{
+            const r = await fetch(p.url, { cache:'no-store' });
+            if (!r.ok) return;
+            const html = await r.text();
+            INDEX.set(p.id, norm(strip(html)));
+        } catch {}
     }));
 }
 
@@ -85,43 +88,22 @@ function getScrollContainer(el){
     }
     return document.scrollingElement || document.documentElement;
 }
-
 function scrollToInContainer(target, container, align = 'center', offset = 8){
     if (!target || !container) return;
     const cRect = container.getBoundingClientRect();
     const tRect = target.getBoundingClientRect();
-
     const distTop = tRect.top - cRect.top;
-
     let top;
-    if (align === 'start') {
-        top = container.scrollTop + distTop - offset;
-    } else if (align === 'end') {
-        top = container.scrollTop + distTop - (container.clientHeight - tRect.height) + offset;
-    } else {
-        top = container.scrollTop + distTop - (container.clientHeight / 2 - tRect.height / 2);
-    }
-
+    if (align === 'start') top = container.scrollTop + distTop - offset;
+    else if (align === 'end') top = container.scrollTop + distTop - (container.clientHeight - tRect.height) + offset;
+    else top = container.scrollTop + distTop - (container.clientHeight / 2 - tRect.height / 2);
     container.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
 }
-
 function scrollFirst(align = 'center'){
     const first = document.getElementById('content')?.querySelector('mark');
     if (!first) return;
     const scroller = getScrollContainer(first) || document.getElementById('content');
     scrollToInContainer(first, scroller, align, 12);
-}
-
-function forceRehighlight(term, shouldScroll = false){
-    const root = document.getElementById('content');
-    if (!root || !term) return;
-    requestAnimationFrame(() => {
-        clearHighlights(root);
-        const n = highlight(root, term);
-        if (shouldScroll && n > 0) {
-            requestAnimationFrame(() => scrollFirst('center'));
-        }
-    });
 }
 
 function hideResults(){ results.innerHTML=''; results.style.display='none'; }
@@ -136,17 +118,10 @@ function showResults(items){
         div.addEventListener('click', () => {
             LAST_TERM = (input.value || '').trim();
             sessionStorage.setItem('dd_last_search', LAST_TERM);
-
             sessionStorage.setItem('dd_nav_from', 'search');
             sessionStorage.setItem('dd_nav_target', it.id);
             sessionStorage.setItem('dd_scroll_first', '1');
-
-            const current = (location.hash.slice(1) || 'home');
-            if (current === it.id) {
-                forceRehighlight(LAST_TERM, true);
-            } else {
-                location.hash = it.id;
-            }
+            if (typeof window.__DD_NAV === 'function') window.__DD_NAV(it.id);
         });
 
         results.append(div);
@@ -176,10 +151,8 @@ async function onInput(){
     const term = (input.value || '').trim();
     LAST_TERM = term;
     sessionStorage.setItem('dd_last_search', LAST_TERM);
-
     const root = document.getElementById('content');
-    if (root) { clearHighlights(root);}
-
+    if (root) clearHighlights(root);
     if (!term){ hideResults(); return; }
     if (!INDEX.size) await buildIndex();
     const items = searchAll(term);
@@ -200,45 +173,31 @@ function onClear(){
     hideResults();
 }
 
-function onHashChange(){
-    if (sessionStorage.getItem('dd_nav_from') === 'search') return;
-}
-
 function onRouteLoaded(){
-    const current = (location.hash.slice(1) || 'home');
     const from    = sessionStorage.getItem('dd_nav_from');
     const target  = sessionStorage.getItem('dd_nav_target');
     const scroll  = sessionStorage.getItem('dd_scroll_first') === '1';
+    const current = new URL(location.href).pathname.split('/').filter(Boolean).pop() || 'home';
 
     if (from === 'search' && target === current){
         sessionStorage.removeItem('dd_nav_from');
         sessionStorage.removeItem('dd_nav_target');
         sessionStorage.removeItem('dd_scroll_first');
-
         const term = LAST_TERM || (input.value || '').trim();
         if (!term) return;
 
-        const tryApply = (tries = 0) => {
-            const root = document.getElementById('content');
-            if (!root) return;
-            clearHighlights(root);
-            const n = highlight(root, term);
-            if (n > 0){
-                if (scroll) requestAnimationFrame(() => scrollFirst('center'));
-                return;
-            }
-            if (tries < 6) setTimeout(() => tryApply(tries + 1), 60);
-        };
-        requestAnimationFrame(() => tryApply());
+        const root = document.getElementById('content');
+        if (!root) return;
+        clearHighlights(root);
+        const n = highlight(root, term);
+        if (n > 0 && scroll) requestAnimationFrame(() => scrollFirst('center'));
     } else {
         onClear();
     }
 }
 
-
 if (input) input.addEventListener('input', onInput);
 if (clearBtn) clearBtn.addEventListener('click', onClear);
-window.addEventListener('hashchange', onHashChange);
 window.addEventListener('route:loaded', onRouteLoaded);
 
 if (LAST_TERM) input.value = LAST_TERM;

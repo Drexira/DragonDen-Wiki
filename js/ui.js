@@ -1,21 +1,23 @@
-﻿const body    = document.body;
-const btn     = document.getElementById('sidebarCollapseBtn');
+﻿const body = document.body;
+const btn = document.getElementById('sidebarCollapseBtn');
 const hotzone = document.getElementById('sidebarHotzone');
 
-const KEY_SIDEBAR    = 'sidebar-collapsed';
-const KEY_DYSLEXIC   = 'pref-dyslexic';
+const KEY_SIDEBAR = 'sidebar-collapsed';
+const KEY_DYSLEXIC = 'pref-dyslexic';
 const KEY_MENU_STATE = 'dd_menu_state';
 
-const BREAKPOINT_PX  = 900;
+const BREAKPOINT_PX = 900;
 let _wasMobile = window.innerWidth <= BREAKPOINT_PX;
 
+function calcBase(){
+    if (window.__DD_BASE) return window.__DD_BASE;
+    const parts = location.pathname.split('/').filter(Boolean);
+    return '/' + (parts[0] || '');
+}
+const BASE = calcBase();
+
 function slugify(s){
-    return (s || '')
-        .toLowerCase()
-        .trim()
-        .replace(/[\s_/]+/g, '-')
-        .replace(/[^a-z0-9-]/g, '')
-        .replace(/-+/g, '-');
+    return (s || '').toLowerCase().trim().replace(/[\s_/]+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-');
 }
 function readMenuState(){
     try { return JSON.parse(localStorage.getItem(KEY_MENU_STATE) || '{}') || {}; }
@@ -42,8 +44,8 @@ function applyDyslexic(on){
     const b = document.getElementById('dyslexicToggle');
     if (b){
         b.setAttribute('aria-pressed', String(!!on));
-        b.textContent = `Dyslexic font ${on ? 'On' : 'Off'}`;
-        b.title = `Toggle OpenDyslexic Alt+D currently ${on ? 'On' : 'Off'}`;
+        b.textContent = 'Dyslexic font ' + (on ? 'On' : 'Off');
+        b.title = 'Toggle OpenDyslexic Alt+D currently ' + (on ? 'On' : 'Off');
     }
 }
 
@@ -51,22 +53,20 @@ function toggleGroup(group, toggleEl, groupId){
     const willCollapse = !group.classList.contains('is-collapsed');
     group.classList.toggle('is-collapsed', willCollapse);
     if (toggleEl) toggleEl.setAttribute('aria-expanded', String(!willCollapse));
-
     const map = readMenuState();
     map[groupId] = willCollapse;
     writeMenuState(map);
 }
 function initCollapsibleMenus(){
     const state = readMenuState();
-
     document.querySelectorAll('.menu-group').forEach((group, index) => {
         const titleWrap = group.querySelector('.menu-group__title');
         const list = group.querySelector('.menu-group__list');
         if (!titleWrap || !list) return;
 
         const titleText = (titleWrap.textContent || '').trim();
-        const groupId = slugify(titleText) || `group-${index}`;
-        const listId = `menu-list-${groupId}`;
+        const groupId = slugify(titleText) || 'group-' + index;
+        const listId = 'menu-list-' + groupId;
         list.id = listId;
 
         if (!titleWrap.querySelector('.menu-title-text')){
@@ -106,7 +106,6 @@ applyDyslexic(localStorage.getItem(KEY_DYSLEXIC) === '1');
 
 function handleResponsive(){
     const isMobile = window.innerWidth <= BREAKPOINT_PX;
-
     if (isMobile && !_wasMobile){
         applySidebar(true);
         body.classList.remove('sidebar-peek');
@@ -115,7 +114,6 @@ function handleResponsive(){
         applySidebar(saved);
         body.classList.remove('sidebar-peek');
     }
-
     _wasMobile = isMobile;
 }
 window.addEventListener('resize', handleResponsive);
@@ -141,30 +139,17 @@ if (hotzone){
 const brand = document.getElementById('home-title');
 if (brand){
     const goHome = () => {
-        const target = 'home';
-        const content = document.getElementById('content');
-
         try { window.scrollTo({ top: 0, behavior: 'instant' }); } catch { window.scrollTo(0, 0); }
+        const content = document.getElementById('content');
         if (content){
             try { content.scrollTo({ top: 0, behavior: 'instant' }); } catch { content.scrollTop = 0; }
         }
-
-        const current = (location.hash.slice(1) || 'home');
-        if (current === target){
-            const restore = () => { location.hash = target; };
-            location.hash = '';
-            setTimeout(restore, 0);
-        } else {
-            location.hash = target;
-        }
+        history.pushState({},'',BASE + '/');
+        window.dispatchEvent(new Event('popstate'));
     };
-
     brand.addEventListener('click', (e) => { e.preventDefault(); goHome(); });
     brand.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' '){
-            e.preventDefault();
-            goHome();
-        }
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); goHome(); }
     });
 }
 

@@ -6,16 +6,6 @@
     <link rel="icon" type="image/x-icon" href="res/favicon.ico">
     <title>Dragon Den Wiki</title>
     <script>document.documentElement.classList.add('preload')</script>
-    <style>
-        html,body { background:#0b0d10; color:#e6e8eb; margin:0; height:100% }
-        html.preload body > :not(#appLoader){ visibility:hidden }
-
-        #appLoader{position:fixed; inset:0; z-index:2147483647; display:flex; align-items:center; justify-content:center; background:rgba(11,13,16,.96); opacity:1; transition:opacity .18s ease}
-        #appLoader.is-hidden{opacity:0; pointer-events:none}
-        #appLoader .spinner{width:48px;height:48px;border-radius:50%;
-            border:4px solid rgba(255,255,255,.15); border-top-color:#dd5c09; animation:spin .9s linear infinite}
-        @keyframes spin{to{transform:rotate(360deg)}}
-    </style>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
@@ -26,27 +16,20 @@
 <body>
 <div id="appLoader" class="loader" aria-hidden="true">
     <div class="loader__backdrop"></div>
-
     <div class="loader__card" role="status" aria-live="polite">
         <div class="loader__ring">
             <div class="loader__ringTrack"></div>
             <div class="loader__ringFill"></div>
-            <div class="loader__logo">
-                <img src="res/placeholder.png" alt="Dragon Den logo">
-            </div>
+            <div class="loader__logo"><img src="res/dragondenlogo.png" alt="Dragon Den logo"></div>
             <span class="loader__comet" style="--d:0ms"></span>
             <span class="loader__comet" style="--d:200ms"></span>
             <span class="loader__comet" style="--d:400ms"></span>
             <span class="loader__comet" style="--d:600ms"></span>
             <span class="loader__comet" style="--d:800ms"></span>
         </div>
-
         <div class="loader__title">Dragon Den</div>
         <div class="loader__msg" id="loaderMsg">Warming up the den…</div>
-
-        <div class="loader__bar">
-            <div class="loader__barFill" id="loaderBar" style="--p:0%"></div>
-        </div>
+        <div class="loader__bar"><div class="loader__barFill" id="loaderBar" style="--p:0%"></div></div>
     </div>
 </div>
 
@@ -76,14 +59,13 @@
                 <li data-page="mods" tabindex="0">Dragon Den Mods</li>
             </ul>
         </li>
-
         <li class="menu-group">
             <div class="menu-group__title"><span style="color: var(--brand)">Wiki Pages</span></div>
             <ul class="menu-group__list">
                 <li data-page="euphoria" tabindex="0">Dragon Den Euphoria</li>
-                <li data-page="weightsraidtimer" tabindex="0">Dragon Den Weights and Raid Timer</li>
-                <li data-page="thezonemaker" tabindex="0">Dragon Den The Zone Maker</li>
-                <li data-page="questimmersion" tabindex="0">Dragon Den Quest Immersion</li>
+                <li data-page="weightsraidtimer" tabindex="0">Weights and Raid Timer</li>
+                <li data-page="thezonemaker" tabindex="0">The Zone Maker</li>
+                <li data-page="questimmersion" tabindex="0">Quest Immersion</li>
             </ul>
         </li>
     </ul>
@@ -109,9 +91,9 @@
 
 <script type="module">
     import './js/components/code-block.js'
+    import { startRouter } from './js/router.js'
     import './js/ui.js'
     import './js/search.js'
-    import { startRouter } from './js/router.js'
     startRouter()
 </script>
 </body>
