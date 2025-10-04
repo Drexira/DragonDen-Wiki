@@ -1,10 +1,13 @@
-﻿const body = document.body;
-const btn = document.getElementById('sidebarCollapseBtn');
+﻿const body    = document.body;
+const btn     = document.getElementById('sidebarCollapseBtn');
 const hotzone = document.getElementById('sidebarHotzone');
 
-const KEY_SIDEBAR   = 'sidebar-collapsed';
-const KEY_DYSLEXIC  = 'pref-dyslexic';
+const KEY_SIDEBAR    = 'sidebar-collapsed';
+const KEY_DYSLEXIC   = 'pref-dyslexic';
 const KEY_MENU_STATE = 'dd_menu_state';
+
+const BREAKPOINT_PX  = 900;
+let _wasMobile = window.innerWidth <= BREAKPOINT_PX;
 
 function slugify(s){
     return (s || '')
@@ -33,7 +36,6 @@ function applySidebar(collapsed){
         btn.textContent = collapsed ? '→' : '←';
     }
 }
-
 function applyDyslexic(on){
     document.documentElement.classList.toggle('dyslexic', !!on);
     localStorage.setItem(KEY_DYSLEXIC, on ? '1' : '0');
@@ -46,7 +48,7 @@ function applyDyslexic(on){
 }
 
 function toggleGroup(group, toggleEl, groupId){
-    const willCollapse = !group.classList.contains('is-collapsed') ? true : false;
+    const willCollapse = !group.classList.contains('is-collapsed');
     group.classList.toggle('is-collapsed', willCollapse);
     if (toggleEl) toggleEl.setAttribute('aria-expanded', String(!willCollapse));
 
@@ -54,7 +56,6 @@ function toggleGroup(group, toggleEl, groupId){
     map[groupId] = willCollapse;
     writeMenuState(map);
 }
-
 function initCollapsibleMenus(){
     const state = readMenuState();
 
@@ -90,10 +91,9 @@ function initCollapsibleMenus(){
         group.classList.toggle('is-collapsed', isCollapsed);
         toggle.setAttribute('aria-expanded', String(!isCollapsed));
 
-        titleWrap.addEventListener('click', (e) => {
+        titleWrap.addEventListener('click', () => {
             toggleGroup(group, toggle, groupId);
         });
-
         toggle.addEventListener('click', (e) => {
             e.stopPropagation();
             toggleGroup(group, toggle, groupId);
@@ -103,6 +103,24 @@ function initCollapsibleMenus(){
 
 applySidebar(localStorage.getItem(KEY_SIDEBAR) === '1');
 applyDyslexic(localStorage.getItem(KEY_DYSLEXIC) === '1');
+
+function handleResponsive(){
+    const isMobile = window.innerWidth <= BREAKPOINT_PX;
+
+    if (isMobile && !_wasMobile){
+        applySidebar(true);
+        body.classList.remove('sidebar-peek');
+    } else if (!isMobile && _wasMobile){
+        const saved = localStorage.getItem(KEY_SIDEBAR) === '1';
+        applySidebar(saved);
+        body.classList.remove('sidebar-peek');
+    }
+
+    _wasMobile = isMobile;
+}
+window.addEventListener('resize', handleResponsive);
+window.addEventListener('orientationchange', handleResponsive);
+handleResponsive();
 
 if (btn){
     btn.addEventListener('click', () => applySidebar(!body.classList.contains('sidebar-collapsed')));
@@ -117,6 +135,36 @@ if (hotzone){
     hotzone.addEventListener('click', () => {
         applySidebar(false);
         body.classList.remove('sidebar-peek');
+    });
+}
+
+const brand = document.getElementById('home-title');
+if (brand){
+    const goHome = () => {
+        const target = 'home';
+        const content = document.getElementById('content');
+
+        try { window.scrollTo({ top: 0, behavior: 'instant' }); } catch { window.scrollTo(0, 0); }
+        if (content){
+            try { content.scrollTo({ top: 0, behavior: 'instant' }); } catch { content.scrollTop = 0; }
+        }
+
+        const current = (location.hash.slice(1) || 'home');
+        if (current === target){
+            const restore = () => { location.hash = target; };
+            location.hash = '';
+            setTimeout(restore, 0);
+        } else {
+            location.hash = target;
+        }
+    };
+
+    brand.addEventListener('click', (e) => { e.preventDefault(); goHome(); });
+    brand.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            goHome();
+        }
     });
 }
 
