@@ -1,4 +1,17 @@
-﻿<section class="content-section scan">
+﻿<script>
+    (function () {
+        var parts = location.pathname.split('/').filter(Boolean);
+        var base = '/' + (parts[0] || '');
+        var leaf = parts[parts.length - 1] || '';
+        var prev = parts[parts.length - 2] || '';
+        var candidate = leaf || prev;
+        var page = (candidate.replace(/\.html?$/i, '') || 'home');
+        if (window === window.top && !document.getElementById('content')) {
+            location.replace(base + '/#' + page);
+        }
+    })();
+</script>
+<section class="content-section scan">
     <h2 onclick="showContent('mods')">
         <span class="title-grad">Dragon Den - Mods</span>
     </h2>

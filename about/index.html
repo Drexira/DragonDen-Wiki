@@ -1,4 +1,17 @@
-﻿<section class="content-section home-hero scan">
+﻿<script>
+    (function () {
+        var parts = location.pathname.split('/').filter(Boolean);
+        var base = '/' + (parts[0] || '');
+        var leaf = parts[parts.length - 1] || '';
+        var prev = parts[parts.length - 2] || '';
+        var candidate = leaf || prev;
+        var page = (candidate.replace(/\.html?$/i, '') || 'home');
+        if (window === window.top && !document.getElementById('content')) {
+            location.replace(base + '/#' + page);
+        }
+    })();
+</script>
+<section class="content-section home-hero scan">
     <h2 class="home-title" onclick="showContent('about')">
         <span class="title-grad">About Me</span>
     </h2>
