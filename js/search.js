@@ -11,10 +11,11 @@ const PAGES = [
     { id: 'home',            url: toAbs('pages/home.html'),             title: 'Home' },
     { id: 'about',           url: toAbs('about/index.html'),            title: 'About Me' },
     { id: 'mods',            url: toAbs('mods/index.html'),             title: 'Dragon Den Mods' },
-    { id: 'euphoria',        url: toAbs('euphoria/index.html'),         title: 'Dragon Den Euphoria' },
-    { id: 'weightsraidtimer',url: toAbs('weightsraidtimer/index.html'), title: 'Weights and Raid Timer' },
-    { id: 'thezonemaker',    url: toAbs('thezonemaker/index.html'),     title: 'The Zone Maker' },
-    { id: 'questimmersion',  url: toAbs('questimmersion/index.html'),   title: 'Quest Immersion' }
+    { id: 'euphoria',        url: toAbs('euphoria/index.html'),         title: 'DD - Euphoria' },
+    { id: 'neonsigns',       url: toAbs('neonsigns/index.html'),        title: 'DD - Neon Signs' },
+    { id: 'weightsraidtimer',url: toAbs('weightsraidtimer/index.html'), title: 'DD - Weights and Raid Timer' },
+    { id: 'thezonemaker',    url: toAbs('thezonemaker/index.html'),     title: 'DD - The Zone Maker' },
+    { id: 'questimmersion',  url: toAbs('questimmersion/index.html'),   title: 'DD - Quest Immersion' }
 ];
 
 const INDEX = new Map();

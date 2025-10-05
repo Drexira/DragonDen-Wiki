@@ -25,7 +25,6 @@
     transition: transform .15s ease, box-shadow .25s ease;
 }
 .content-section:hover{
-    transform: translateY(-1px);
     box-shadow: 0 16px 40px rgba(0,0,0,.34), inset 0 1px 0 var(--glass-inner);
 }
 
@@ -480,6 +479,58 @@ blockquote.is-compact{ padding: 10px 12px 10px 42px; border-radius: 10px }
 .btn-small.is-primary:hover{
     background:#1e2328;
     border-color: rgba(255,255,255,.25);
+}
+
+.quest-grid{
+    display:grid;
+    grid-template-columns:minmax(260px,512px) 1fr;
+    gap:16px;
+    align-items:start;
+}
+.quest-image img{
+    width:100%;
+    height:auto;
+    border-radius:10px;
+    box-shadow:0 2px 12px rgba(0,0,0,.45);
+}
+.quest-quote{ margin:0 }
+.quest-bottom{
+    grid-column:1 / -1;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:6px;
+}
+.quest-subtitle{ margin:10px 0 6px; color:var(--brand-3) }
+.quest-list, .dialog-list{
+    margin:0;
+    padding-left:0;
+    list-style:none;
+}
+.quest-list li, .dialog-list li{
+    margin:6px 0;
+    color:var(--brand-4);
+}
+.dialog-list li b{ color:var(--brand); margin-right:6px }
+
+.quest-hints{ grid-column:1 / -1; margin-top:10px }
+.hint-grid{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:10px;
+    margin-top:10px;
+}
+.hint-img{
+    width:100%;
+    height:auto;
+    border-radius:10px;
+    box-shadow:0 2px 12px rgba(0,0,0,.35);
+}
+
+@media (max-width:900px){
+    .quest-grid{ grid-template-columns:1fr }
+    .quest-bottom{ grid-template-columns:1fr }
+    .hint-grid{ grid-template-columns:1fr }
 }
 
 @keyframes scan-line{ to{ transform: translateY(900px) } }

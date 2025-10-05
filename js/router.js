@@ -3,6 +3,7 @@
     ['about',           'about/index.html'],
     ['mods',            'mods/index.html'],
     ['euphoria',        'euphoria/index.html'],
+    ['neonsigns',       'neonsigns/index.html'],
     ['weightsraidtimer','weightsraidtimer/index.html'],
     ['thezonemaker',    'thezonemaker/index.html'],
     ['questimmersion',  'questimmersion/index.html']
