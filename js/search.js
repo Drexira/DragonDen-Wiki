@@ -8,7 +8,7 @@ const BASE = window.__DD_BASE || ('/' + (location.pathname.split('/').filter(Boo
 const toAbs = (p) => `${BASE}/${p.replace(/^\//,'')}`;
 
 const PAGES = [
-    { id: 'home',            url: toAbs('pages/home.html'),             title: 'Home' },
+    { id: 'home',            url: toAbs('pages/home.html'),                   title: 'Home' },
     { id: 'about',           url: toAbs('pages/about/index.html'),            title: 'About Me' },
     { id: 'mods',            url: toAbs('pages/mods/index.html'),             title: 'Dragon Den Mods' },
     { id: 'euphoria',        url: toAbs('pages/euphoria/index.html'),         title: 'DD - Euphoria' },
@@ -174,11 +174,11 @@ function onClear(){
     hideResults();
 }
 
-function onRouteLoaded(){
+function onRouteLoaded(evt){
     const from    = sessionStorage.getItem('dd_nav_from');
     const target  = sessionStorage.getItem('dd_nav_target');
     const scroll  = sessionStorage.getItem('dd_scroll_first') === '1';
-    const current = new URL(location.href).pathname.split('/').filter(Boolean).pop() || 'home';
+    const current = (evt && evt.detail && evt.detail.page) || (location.hash.slice(1) || 'home');
 
     if (from === 'search' && target === current){
         sessionStorage.removeItem('dd_nav_from');
@@ -186,7 +186,6 @@ function onRouteLoaded(){
         sessionStorage.removeItem('dd_scroll_first');
         const term = LAST_TERM || (input.value || '').trim();
         if (!term) return;
-
         const root = document.getElementById('content');
         if (!root) return;
         clearHighlights(root);
