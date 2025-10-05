@@ -333,7 +333,7 @@ blockquote.is-compact{ padding: 10px 12px 10px 42px; border-radius: 10px }
 }
 @keyframes cometSpin { to { transform: rotate(360deg) } }
 .loader.is-anim .loader__comet{
-    animation: cometSpin 3.6s linear infinite;
+    animation: cometSpin 0.5s linear infinite;
     animation-delay: var(--d);
 }
 
