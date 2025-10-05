@@ -265,7 +265,6 @@ blockquote.quote-brand  { --q-accent: var(--brand)   }
 
 blockquote.is-compact{ padding: 10px 12px 10px 42px; border-radius: 10px }
 
-
 .loader{
     position: fixed; inset: 0; z-index:1500;
     pointer-events:none; opacity:0; transition: opacity .18s ease;
