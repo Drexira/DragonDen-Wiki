@@ -1,12 +1,12 @@
 ﻿const routes = new Map([
     ['home',            'pages/home.html'],
-    ['about',           'about/index.html'],
-    ['mods',            'mods/index.html'],
-    ['euphoria',        'euphoria/index.html'],
-    ['neonsigns',       'neonsigns/index.html'],
-    ['weightsraidtimer','weightsraidtimer/index.html'],
-    ['thezonemaker',    'thezonemaker/index.html'],
-    ['questimmersion',  'questimmersion/index.html']
+    ['about',           'pages/about/index.html'],
+    ['mods',            'pages/mods/index.html'],
+    ['euphoria',        'pages/euphoria/index.html'],
+    ['neonsigns',       'pages/neonsigns/index.html'],
+    ['weightsraidtimer','pages/weightsraidtimer/index.html'],
+    ['thezonemaker',    'pages/thezonemaker/index.html'],
+    ['questimmersion',  'pages/questimmersion/index.html']
 ]);
 
 const GLOBAL_HINTS = [
