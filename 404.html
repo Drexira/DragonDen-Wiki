@@ -10,13 +10,18 @@
     </style>
     <script>
         (function () {
-            var parts = location.pathname.split('/').filter(Boolean);
-            var base = '/' + (parts[0] || '');
-            var leaf = parts[parts.length - 1] || '';
-            var prev = parts[parts.length - 2] || '';
+            var base = window.__DD_BASE || (function(){
+                var parts = location.pathname.split('/').filter(Boolean);
+                return parts.length ? '/' + parts[0] : '';
+            })();
+            var bits = location.pathname.split('/').filter(Boolean);
+            var leaf = bits[bits.length - 1] || '';
+            var prev = bits[bits.length - 2] || '';
             var candidate = leaf || prev;
             var page = (candidate.replace(/\.html?$/i, '') || 'home');
-            location.replace(base + '/#' + page);
+            var hash = '#'+page;
+            var q = location.search || '';
+            location.replace(base + '/' + hash + q);
         })();
     </script>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -44,7 +49,7 @@
 <script>
     (function(){
         const base = window.__DD_BASE || '/';
-        document.getElementById('pathInfo').textContent = location.pathname;
+        document.getElementById('pathInfo').textContent = location.pathname + location.search + location.hash;
         document.getElementById('backHome').addEventListener('click', function(e){
             e.preventDefault();
             location.href = base;
