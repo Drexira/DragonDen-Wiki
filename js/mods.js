@@ -9,6 +9,7 @@ async function getMods(ids){
     const qs = new URLSearchParams()
     qs.set('fields', FIELDS)
     qs.set('filter[id]', ids.join(','))
+    qs.set('include', 'versions')
     const r = await fetch(`${API_BASE}/mods?${qs.toString()}`, {
         headers: { Authorization: `Bearer ${API_KEY}`, Accept: 'application/json' }
     })
@@ -23,6 +24,27 @@ function buildIconCandidates(mod){
         try { api.push(new URL(mod.thumbnail, 'https://forge-static.sp-tarkov.com').href) } catch {}
     }
     return api
+}
+
+function latestVersionInfo(mod){
+    const list = Array.isArray(mod.versions) ? mod.versions
+        : (mod.versions && Array.isArray(mod.versions.data)) ? mod.versions.data
+            : []
+    let best = null
+    let bestV = null
+    for (const v of list){
+        const cand = v.published_at || v.created_at || v.updated_at
+        const d = cand ? new Date(cand) : null
+        if (d && (!best || d > best)){ best = d; bestV = v.version || null }
+    }
+    return { date: best || (mod.updated_at ? new Date(mod.updated_at) : null), version: bestV }
+}
+
+function pill(text){
+    const s = document.createElement('span')
+    s.className = 'mod-pill'
+    s.textContent = text
+    return s
 }
 
 function modCard(m){
@@ -40,7 +62,6 @@ function modCard(m){
     img.decoding = 'async'
     img.width = 100
     img.height = 100
-
     const candidates = buildIconCandidates(m)
     let i = 0
     const tryNext = () => { if (i < candidates.length){ img.src = candidates[i++] } }
@@ -53,15 +74,17 @@ function modCard(m){
     h2.textContent = m.name || 'Untitled Mod'
     const p = document.createElement('p')
     p.textContent = m.teaser || ''
+
     const meta = document.createElement('div')
-    meta.className = 'mod-meta'
-    meta.style.opacity = '0.9'
-    meta.style.fontSize = '0.92em'
-    const bits = []
-    if (typeof m.downloads === 'number') bits.push(`${m.downloads.toLocaleString()} downloads`)
-    if (m.featured) bits.push('Featured')
-    if (m.updated_at) bits.push('Updated ' + new Date(m.updated_at).toLocaleDateString())
-    meta.textContent = bits.join(' • ')
+    meta.className = 'mod-pills'
+
+    if (typeof m.downloads === 'number') meta.append(pill(`${m.downloads.toLocaleString()} downloads`))
+
+    const { date, version } = latestVersionInfo(m)
+    if (date) meta.append(pill(`Updated ${date.toLocaleDateString()}`))
+    if (version) meta.append(pill(`v${version}`))
+    if (m.featured) meta.append(pill('Featured'))
+
     info.append(h2, p, meta)
     a.append(img, info)
     return a

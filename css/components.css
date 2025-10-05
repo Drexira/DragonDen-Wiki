@@ -124,13 +124,21 @@ details.spoiler > *:not(summary){ margin-top:.75rem }
     text-shadow: 0 0 8px rgba(255,138,61,0.25);
 }
 .mod-item{
-    display:flex; flex-direction:row; align-items:center;
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
     background: rgba(255,255,255,0.06);
-    border:2px solid var(--border); border-radius:10px; padding:10px;
+    border:2px solid var(--border);
+    border-radius:10px;
+    padding:10px;
     cursor:pointer;
     transition: transform .3s, background .3s, border-color .3s, box-shadow .3s;
-    width:100%; max-width:700px; margin:auto; text-align:left;
+    width:100%;
+    max-width:700px;
+    margin:auto;
+    text-align:left;
     box-shadow: 0 6px 16px var(--mod-shadow);
+    overflow:visible;
 }
 .mod-item:hover{
     transform: scale(1.05);
@@ -154,7 +162,16 @@ details.spoiler > *:not(summary){ margin-top:.75rem }
 }
 .mod-info{ flex:1 1 auto; min-width:0; margin-left:15px; margin-right:5px }
 .mod-info h2{ font-size:16px; color: var(--brand); margin:0 0 4px 0 }
-.mod-info p{ margin:0; color: var(--muted); line-height:1.15 }
+.mod-info p{
+    margin:0;
+    color: var(--muted);
+    line-height:1.35;
+    white-space:normal;
+    overflow:visible;
+    max-height:none;
+    -webkit-line-clamp:unset;
+    line-clamp:unset;
+}
 .mod-meta{
     margin-right:16px; color: var(--muted); font-size:.92em; letter-spacing:.1px;
     padding:2px 6px; background: rgba(255,138,61,.08); border:1px solid rgba(255,138,61,.25);
@@ -524,6 +541,33 @@ blockquote.is-compact{ padding: 10px 12px 10px 42px; border-radius: 10px }
     height:auto;
     border-radius:10px;
     box-shadow:0 2px 12px rgba(0,0,0,.35);
+}
+
+.mod-pills{
+    display:flex;
+    gap:.5rem;
+    flex-wrap:wrap;
+    margin-top:.4rem;
+}
+.mod-pill{
+    display:inline-flex;
+    align-items:center;
+    background:rgba(255,255,255,.08);
+    border:1px solid var(--mod-pill-border, rgba(255,255,255,.15));
+    padding:.15rem .5rem;
+    border-radius:999px;
+    font-size:.88em;
+    line-height:1.25;
+    white-space:nowrap;
+}
+
+#mods-own .mod-pill{
+    --mod-pill-border: var(--brand, #28d7c4);
+}
+
+#mods-helped .mod-pill,
+.mod-item.helped .mod-pill{
+    --mod-pill-border: var(--brand-2, #ff6bd6);
 }
 
 @media (max-width:900px){
