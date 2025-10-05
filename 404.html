@@ -10,18 +10,15 @@
     </style>
     <script>
         (function () {
-            var base = window.__DD_BASE || (function(){
-                var parts = location.pathname.split('/').filter(Boolean);
-                return parts.length ? '/' + parts[0] : '';
-            })();
-            var bits = location.pathname.split('/').filter(Boolean);
-            var leaf = bits[bits.length - 1] || '';
-            var prev = bits[bits.length - 2] || '';
-            var candidate = leaf || prev;
-            var page = (candidate.replace(/\.html?$/i, '') || 'home');
-            var hash = '#'+page;
-            var q = location.search || '';
-            location.replace(base + '/' + hash + q);
+            var PAGES = ['home','about','mods','euphoria','neonsigns','weightsraidtimer','thezonemaker','questimmersion'];
+
+            var segs  = location.pathname.replace(/\/+/g,'/').split('/').filter(Boolean);
+            var first = segs[0] || '';
+            var base  = '/' + (PAGES.includes(first) ? '' : first);
+            var slug  = (segs.slice().reverse().map(s => s.replace(/\.html?$/i,''))
+                .find(s => PAGES.includes(s))) || 'home';
+
+            location.replace(base + '/#' + slug + location.search);
         })();
     </script>
     <meta name="viewport" content="width=device-width,initial-scale=1" />

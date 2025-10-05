@@ -115,7 +115,10 @@ function basePath(){
 const BASE = basePath();
 window.__DD_BASE = BASE;
 
-function toAbs(p){ return `${BASE}/${p.replace(/^\//,'')}`; }
+function toAbs(p){
+    const b = document.querySelector('base')?.href || location.href;
+    return new URL(p.replace(/^\//,''), b).toString();
+}
 
 function pageFromPathname(pathname){
     let p = pathname.startsWith(BASE) ? pathname.slice(BASE.length) : pathname;
@@ -125,7 +128,7 @@ function pageFromPathname(pathname){
     return routes.has(p) ? p : 'home';
 }
 function pathForPage(page){
-    return BASE + (page === 'home' ? '/' : '/' + page);
+    return BASE + (page === 'home' ? '/' : '/#' + page);
 }
 
 function resetScrollTop(){
@@ -174,12 +177,9 @@ function applyActive(page){
     document.querySelectorAll('#sidebar li[data-page]').forEach(li => li.classList.toggle('active', li.dataset.page === page));
 }
 
-function navigate(page, replace){
-    const dest = pathForPage(page);
-    if (replace) history.replaceState({page},'',dest);
-    else history.pushState({page},'',dest);
-    applyActive(page);
-    load(page);
+function navigate(page){
+    if (location.hash.slice(1) !== page) location.hash = '#'+page;
+    else { applyActive(page); load(page); }
 }
 
 function onNavClick(e){
@@ -189,23 +189,14 @@ function onNavClick(e){
 }
 
 export function startRouter(){
-    const root = content();
-    if (root && !root.hasAttribute('tabindex')) root.setAttribute('tabindex','-1');
-    document.getElementById('menus').addEventListener('click', onNavClick);
-
-    if (location.hash){
-        const page = location.hash.slice(1) || 'home';
-        history.replaceState({page},'',pathForPage(page));
-    }
-
-    window.addEventListener('popstate', () => {
-        const page = pageFromPathname(location.pathname);
+    const first = decodeURIComponent(location.hash.slice(1) || 'home');
+    applyActive(first);
+    load(first);
+    window.addEventListener('hashchange', () => {
+        const page = decodeURIComponent(location.hash.slice(1) || 'home');
         applyActive(page);
         load(page);
     });
-
-    const first = pageFromPathname(location.pathname);
-    applyActive(first);
-    navigate(first,true);
+    document.getElementById('menus').addEventListener('click', onNavClick);
 }
-window.__DD_NAV = (page) => navigate(page,false);
+window.__DD_NAV = (page) => navigate(page);

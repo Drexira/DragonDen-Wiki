@@ -1,17 +1,15 @@
-﻿<script>
+﻿<!doctype html>
+<meta charset="utf-8">
+<script>
     (function(){
-        var d=document;
-        d.documentElement.style.background='#0b0d10';
-        try{ (d.body||(d.body=d.createElement('body'))).style.cssText='background:#0b0d10;margin:0' }catch(e){}
-        var parts=location.pathname.split('/').filter(Boolean);
-        var base='/' + (parts[0]||'');
-        var leaf=parts[parts.length-1]||'';
-        var prev=parts[parts.length-2]||'';
-        var candidate=leaf||prev;
-        var page=(candidate.replace(/\.html?$/i,'')||'home');
-        if(window===window.top && !d.getElementById('content')) location.replace(base+'/#'+page);
+        var segs = location.pathname.split('/').filter(Boolean);
+        var SLUG = 'questimmersion';
+        var known = ['home','about','mods','euphoria','neonsigns','weightsraidtimer','thezonemaker','questimmersion'];
+        var base = '/' + (segs[0] && !known.includes(segs[0]) ? segs[0] : '');
+        location.replace(base + '/#' + SLUG + location.search);
     })();
 </script>
+<noscript><meta http-equiv="refresh" content="0; url=/#questimmersion"></noscript>
 <section class="content-section scan">
     <h2>
         <span class="title-grad">Dragon Den - Quest Immersion</span>
