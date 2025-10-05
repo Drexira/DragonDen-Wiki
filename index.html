@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background:#0b0d10">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#0b0d10">
     <script>
         (function () {
             const parts = location.pathname.split('/').filter(Boolean);
@@ -30,10 +33,10 @@
             <div class="loader__ringFill"></div>
             <div class="loader__logo"><img src="res/dragondenlogo.png" alt="Dragon Den logo"></div>
             <span class="loader__comet" style="--d:0ms"></span>
+            <span class="loader__comet" style="--d:100ms"></span>
             <span class="loader__comet" style="--d:200ms"></span>
+            <span class="loader__comet" style="--d:300ms"></span>
             <span class="loader__comet" style="--d:400ms"></span>
-            <span class="loader__comet" style="--d:600ms"></span>
-            <span class="loader__comet" style="--d:800ms"></span>
         </div>
         <div class="loader__title">Dragon Den</div>
         <div class="loader__msg" id="loaderMsg">Warming up the den…</div>

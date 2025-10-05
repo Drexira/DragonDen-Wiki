@@ -51,7 +51,7 @@ const GLOBAL_HINTS = [
     "Extract camping awareness seminar: eyes behind head..."
 ];
 
-const MIN_LOAD_MS = 250;
+const MIN_LOAD_MS = 450;
 let __barTimer = 0, __p = 0;
 
 const content = () => document.getElementById('content');

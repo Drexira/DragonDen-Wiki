@@ -1,113 +1,98 @@
 :root{
-    --brand: #dd5c09;
-    --brand-2: #157aa6;
-    --brand-3: #1f8142;
-    --brand-4: #ac7a2f;
-
-    --brand-hover: color-mix(in oklab, var(--brand) 82%, white);
-    --brand-2-hover: color-mix(in oklab, var(--brand-2) 82%, white);
-    --brand-3-hover: color-mix(in oklab, var(--brand-3) 82%, white);
-    --brand-4-hover: color-mix(in oklab, var(--brand-4) 82%, white);
-
-    --success: #16a549;
-    --warning: #e17407;
-    --danger: #ec0b13;
-    --info:    #26c6da;
-
-    --text: #e6e8eb;
+    --brand:#dd5c09;
+    --brand-2:#157aa6;
+    --brand-3:#1f8142;
+    --brand-4:#ac7a2f;
+    --brand-hover:color-mix(in oklab,var(--brand) 82%,white);
+    --brand-2-hover:color-mix(in oklab,var(--brand-2) 82%,white);
+    --brand-3-hover:color-mix(in oklab,var(--brand-3) 82%,white);
+    --brand-4-hover:color-mix(in oklab,var(--brand-4) 82%,white);
+    --success:#16a549;
+    --warning:#e17407;
+    --danger:#ec0b13;
+    --info:#26c6da;
+    --text:#e6e8eb;
     --muted:#b8c0cc;
+    --bg:#0b0d10;
+    --panel-grad:linear-gradient(180deg,rgba(5,5,5,.025),rgba(5,5,5,.075));
+    --surface-1:#14181b;
+    --surface-2:#13171a;
+    --glass:rgba(5,6,7,.55);
+    --glass-border:rgba(103,95,95,.29);
+    --glass-inner:rgba(250,75,0,.37);
+    --border:rgba(255,255,255,.15);
+    --shadow:rgba(0,0,0,.55);
+    --code-bg:#17191d;
+    --code-header:#1d2126;
+    --ringA:#dd5c09;
+    --ringB:#ff9a54;
+    --ringC:#26c6da;
+    --hotzone:40px;
+    --help-border:#00bcd4;
+    --help-accent:#26c6da;
+    --help-shadow:rgba(0,188,212,.25);
+    --mod-shadow:rgba(221,92,9,.45);
+    --scan-speed:6s;
+    --scrollbar-track:#14181b;
+    --scrollbar-thumb:var(--brand);
+    --scrollbar-thumb-hover:var(--brand-3);
+    --scrollbar-corner:rgba(255,255,255,.06)
+}
 
-    --bg: #0b0d10;
-    --panel-grad: linear-gradient(180deg, rgba(5, 5, 5, 0.025), rgba(5,5,5,.075));
-    --surface-1: #14181b;
-    --surface-2: #13171a;
-
-    --glass: rgba(5, 6, 7, 0.55);
-    --glass-border: rgba(103, 95, 95, 0.29);
-    --glass-inner: rgba(250, 75, 0, 0.37);
-
-    --border: rgba(255,255,255,.15);
-    --shadow: rgba(0,0,0,.55);
-
-    --code-bg: #17191d;
-    --code-header: #1d2126;
-
-    --ringA: #dd5c09;
-    --ringB: #ff9a54;
-    --ringC: #26c6da;
-
-    --hotzone: 40px;
-
-    --help-border: #00bcd4;
-    --help-accent: #26c6da;
-    --help-shadow: rgba(0,188,212,.25);
-    --mod-shadow: rgba(221,92,9,.45);
-
-    --scan-speed: 6s;
-    
-    --scrollbar-track: #14181b;
-    --scrollbar-thumb: var(--brand);
-    --scrollbar-thumb-hover: var(--brand-3);
-    --scrollbar-corner: rgba(255,255,255,.06);
+html{ background:#0b0d10 }
+body{
+    background: #0b0d10 url("../res/bg.jpg") center center / cover no-repeat fixed;
+    margin:0; padding:0; display:flex; color:#e6e8eb; overflow:hidden; min-height:100vh;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; line-height:1.6; letter-spacing:.01em;
 }
 
 @font-face{
-    font-family: OpenDyslexic;
-    src: url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Regular.woff2") format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Regular.woff") format("woff");
-    font-weight: 400; font-style: normal; font-display: swap;
+    font-family:OpenDyslexic;
+    src:url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Regular.woff2") format("woff2"),url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Regular.woff") format("woff");
+    font-weight:400;font-style:normal;font-display:swap
 }
 @font-face{
-    font-family: OpenDyslexic;
-    src: url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Bold.woff2") format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Bold.woff") format("woff");
-    font-weight: 700; font-style: normal; font-display: swap;
+    font-family:OpenDyslexic;
+    src:url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Bold.woff2") format("woff2"),url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Bold.woff") format("woff");
+    font-weight:700;font-style:normal;font-display:swap
 }
 @font-face{
-    font-family: OpenDyslexic;
-    src: url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Italic.woff2") format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Italic.woff") format("woff");
-    font-weight: 400; font-style: italic; font-display: swap;
+    font-family:OpenDyslexic;
+    src:url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Italic.woff2") format("woff2"),url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Italic.woff") format("woff");
+    font-weight:400;font-style:italic;font-display:swap
 }
 
-html, body { height: 100% }
+html,body{height:100%}
 
 body{
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: -apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;
-    background-color: var(--bg);
-    background: url("../res/bg.jpg") center center / cover no-repeat fixed;
-    margin: 0; padding: 0; display: flex;
-    color: var(--text);
-    overflow: hidden;
-    min-height: 100vh;
-    line-height: 1.6;
-    letter-spacing: 0.01em;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    font-family:-apple-system,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+    background-color:#0b0d10;
+    background-image:url("../res/bg.jpg");
+    background-position:center center;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    margin:0;padding:0;display:flex;
+    color:var(--text);
+    overflow:hidden;
+    min-height:100vh;
+    line-height:1.6;
+    letter-spacing:.01em
 }
 
-html.dyslexic body{
-    font-family: OpenDyslexic, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-}
+html.dyslexic body{font-family:OpenDyslexic,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
 
-h1, h2, h3, h4 { margin: 0 0 10px 0 }
+h1,h2,h3,h4{margin:0 0 10px 0}
 
-a { color: var(--brand-3); text-decoration: none }
-a:hover { color: var(--brand-2); text-decoration: underline }
+a{color:var(--brand-3);text-decoration:none}
+a:hover{color:var(--brand-2);text-decoration:underline}
 
 .btn-small{
-    margin-top: 10px;
-    padding: 8px 10px;
-    border-radius: 8px;
-    border: 1px solid var(--glass-border);
-    background: var(--panel-grad);
-    color: var(--brand);
-    cursor: pointer;
-    transition: background-color .18s ease, box-shadow .18s ease, transform .06s ease, color .18s ease;
+    margin-top:10px;padding:8px 10px;border-radius:8px;border:1px solid var(--glass-border);
+    background:var(--panel-grad);color:var(--brand);cursor:pointer;
+    transition:background-color .18s ease,box-shadow .18s ease,transform .06s ease,color .18s ease
 }
-.btn-small:hover{
-    background:#1e2328;
-    box-shadow: 0 0 0 3px rgba(221,92,9,.12);
-    color:#fff;
-}
-.btn-small:active{ transform: translateY(1px) }
+.btn-small:hover{background:#1e2328;box-shadow:0 0 0 3px rgba(221,92,9,.12);color:#fff}
+.btn-small:active{transform:translateY(1px)}
