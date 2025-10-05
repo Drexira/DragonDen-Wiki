@@ -14,10 +14,10 @@
     --text:#e6e8eb;
     --muted:#b8c0cc;
     --bg:#0b0d10;
-    --panel-grad:linear-gradient(180deg,rgba(5,5,5,.025),rgba(5,5,5,.075));
+    --panel-grad:linear-gradient(180deg,rgba(5,5,5,.65),rgba(5,5,5,.65));
     --surface-1:#14181b;
     --surface-2:#13171a;
-    --glass:rgba(5,6,7,.55);
+    --glass:rgba(5,6,7,.75);
     --glass-border:rgba(103,95,95,.29);
     --glass-inner:rgba(250,75,0,.37);
     --border:rgba(255,255,255,.15);
@@ -41,7 +41,7 @@
 
 html{ background:#0b0d10 }
 body{
-    background: #0b0d10 url("../res/bg.jpg") center center / cover no-repeat fixed;
+    background: #0b0d10 url("../res/bg.png") center center / cover no-repeat fixed;
     margin:0; padding:0; display:flex; color:#e6e8eb; overflow:hidden; min-height:100vh;
     -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; line-height:1.6; letter-spacing:.01em;
 }
@@ -69,7 +69,7 @@ body{
     -moz-osx-font-smoothing:grayscale;
     font-family:-apple-system,system-ui,Segoe UI,Roboto,Arial,sans-serif;
     background-color:#0b0d10;
-    background-image:url("../res/bg.jpg");
+    background-image:url("../res/bg.png");
     background-position:center center;
     background-size:cover;
     background-repeat:no-repeat;
