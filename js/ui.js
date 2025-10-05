@@ -44,7 +44,7 @@ function applyDyslexic(on){
     const b = document.getElementById('dyslexicToggle');
     if (b){
         b.setAttribute('aria-pressed', String(!!on));
-        b.textContent = 'Dyslexic font ' + (on ? 'On' : 'Off');
+        b.textContent = 'Dyslexic Mode ' + (on ? 'On' : 'Off');
         b.title = 'Toggle OpenDyslexic Alt+D currently ' + (on ? 'On' : 'Off');
     }
 }
