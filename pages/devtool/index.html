@@ -1,0 +1,129 @@
+﻿<!doctype html>
+<meta charset="utf-8">
+<script>
+    (function(){
+        var segs = location.pathname.split('/').filter(Boolean);
+        var SLUG = 'devtool';
+        var known = ['home','about','mods','euphoria','neonsigns','weightsraidtimer','thezonemaker','questimmersion','devtool'];
+        var base = '/' + (segs[0] && !known.includes(segs[0]) ? segs[0] : '');
+        location.replace(base + '/#' + SLUG + location.search);
+    })();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=/#devtool"></noscript>
+<section class="content-section scan">
+    <h2 onclick="showContent('devtool')">
+        <span class="title-grad">Dragon Den - Dev Tool</span>
+    </h2>
+    <h2>What it is</h2>
+    <ul>
+        <li>• A simple in-raid window for development testing and messing around.</li>
+        <li>• It helps you heal, toggle protections, drop items, manage bots, teleport to extracts, and save teleport hotspots. </li>
+        <li>• Tabs: <b>Player</b>, <b>Items</b>, <b>Bots</b>, <b>Exfils</b>, <b>Hotspots</b>. </li>
+        <li>• Hotspot Maker tab shows up when Debug Mode is on.</li>
+    </ul>
+
+    <h2>How to open</h2>
+    <ul>
+        <li>Go into a raid.</li>
+        <li>Press <b>Insert</b> to show or hide the window. (or ESC to hide)</li>
+    </ul>
+
+    <h2>Player</h2>
+    <ul>
+        <li><b>Raid</b>: Map. Time. Player counts. PMC. Scavs.</li>
+        <li><b>Player Info</b>: Name. Side. Level. Position. Rotation. <b>Copy Position</b>. (rotation is based on inertia, not fully accurate)</li>
+        <ul>
+            <li>• <b>God Mode</b> makes you the god of the tarkovians, nothing can hurt you.. probably... (always toggled on, can manually toggle off)</li>
+            <li>• <b>No Fall Damage</b> makes you immune to fall damage.</li>
+            <li>• <b>Instant Search</b> makes anything you search instant, like a true loot goblin..</li>
+            <li>• <b>Infinite Stamina</b> gives you infinite stamina for running, oxygen and hand stamina.</li>
+            <li>• <b>Full Heal</b> gives you full health and full energy and hydration. (includes loss of body parts)</li>
+            <li>• <b>Clear Negative Effects</b> will clear any bad effects like Pain, concussion, etc..</li>
+            <li>• <b>Refill Hydration</b> and <b>Refill Energy</b>, just what it sounds like.</li>
+        </ul>
+        <li><b>Vitals</b>: Health, Energy, Hydration, Body Temp, and current DamageCoeff.</li>
+    </ul>
+
+    <h2>Items</h2>
+    <ul>
+        <li>• Search by item name or item tpl id. Results are paged.</li>
+        <li>• <b>Drop 1</b> spawns the item in front of you.</li>
+        <li>• <b>Drop Amount</b> lets you type a number. It uses the item max stack if it can stack and splits stacks as needed.</li>
+    </ul>
+
+    <h2>Bots</h2>
+    <ul>
+        <li>• Filter by id, nickname, or side.</li>
+        <li>• Each row shows Id, Nick, Side. Actions:
+            <ul>
+                <li>• <b>To Me</b> teleports that bot to you.</li>
+                <li>• <b>Me to Them</b> teleports you to them.</li>
+                <li>• <b>Kill</b> kills that bot.</li>  
+            </ul>
+        </li>
+        <li>• <b>Teleport All</b> pulls every bot to your position.</li>
+        <li>• <b>Kill All</b> kills all the bots on the map.</li>
+        <li>• <b>Kill PMCs</b> kills all PMCs on the map.</li>
+        <li>• <b>Kill Scavs</b> kills all the Scavs on the map.</li>
+        <li>• <b>Kill Bosses</b> kills all the Bosses on the map.</li>
+        <li>• <b>Spawn Usec</b> spawns 1 Usec somewhere.</li>
+        <li>• <b>Spawn Bear</b> spawns 1 Bear somewhere.</li>
+        <li>• <b>Spawn Scav</b> spawns 1 Assault Scav somewhere.</li>
+        <li><b>Spawn</b>:
+            <ul>
+                <li>• a role from the popup.</li>
+                <li>• Type an amount from 1 to 50. (more than 20 can cause spawn errors)</li>
+                <li>• Press <b>Spawn</b>. It may take a few seconds for it to spawn, this is dependent on how many you try to spawn and how bsg's logic finds the closest zone to you.</li>
+            </ul>
+        </li>
+        <b>Do note that if teleportation does not work, it's due to bad navigation, try to teleport them where you know they can actually walk to.</b>
+    </ul>
+
+    <h2>Exfils</h2>
+    <ul>
+        <li>• Choose which groups you want to see: PMC, Scav, Secret or all.</li>
+        <li>• Filter by name.</li>
+        <li>• Each result shows Name, Status, Type, Reusable, Chance, Queued, Position, timers, entry points, and tips for exfils like (Car: Bring X RUB).</li>
+        <li>• <b>Teleport</b> moves you to that exfil with a small Y lift.</li>
+        <b>Some extracts can drop you under the ground or out of bounds on some maps. If that happens teleport again or use a hotspot with a higher Y lift.</b>
+    </ul>
+    
+    <h2>Hotspots</h2>
+    <ul>
+        <li>Two tabs:
+            <ul>
+                <li>• <b>Global Hotspots</b> has about <b>225</b> premade hotspots made, but you can edit these locally at <code>BepInEx\plugins\DragonDenDevTool\hotspots_global.json</code>.</li>
+                <li>• <b>Favourite Hotspots</b> are yours for the current map, can be seen in <code>BepInEx\plugins\DragonDenDevTool\hotspots_favourites.json</code>.</li>
+                <ul>
+                    <li>• The favourites can be made in the raid by naming and adding to favourite or adding an existing global hotspot.</li>
+                </ul>
+            </ul>
+        </li>
+        <li>Buttons:
+            <ul>
+                <li>• <b>Teleport</b> teleports you to the spot with the Y Lift offset.</li>
+                <li>• <b>Favourite</b> adds a global hotspot to your favourites if it is not already there.</li>
+                <li>• <b>Remove</b> deletes a favourite.</li>
+                <li>• <b>Reload Hotspots</b> reads the JSON files again and updates the list.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Hotspot Maker</h2>
+    <p>This was made for the global hotspots, it's easier to add new favourites for you than using this.</p>
+    <ul>
+        <li>• Only shows when <b>Debug Mode</b> is on from BepInEx Settings Menu.</li>
+        <li>• Shows the output file path. Lets you name a new hotspot and pick a category.</li>
+        <li>• <b>Fetch Position</b> grabs your current X Y Z.</li>
+        <li>• <b>Teleport Test</b> tries the position with a small Y offset.</li>
+        <li>• <b>Add To File</b> updates the global hotspots JSON.</li>
+        <li>• <b>Fetch & Add To File</b> updates position and updates the global hotspots JSON.</li>
+        <li>• <b>Open Folder</b> opens the plugin folder so you can see the files.</li>
+    </ul>
+    <h2>Settings</h2>
+    <ul>
+        <li>• <b>Toggle UI</b>: default is <code>Insert</code>. You can bind it in the BepInEx config.</li>
+        <li>• <b>Update Interval</b>: how often Player and Bots tab refreshes. Default 0.25 seconds.</li>
+        <li>• <b>Debug Mode</b>: shows Hotspot Maker and extra logs.</li>
+    </ul>
+</section>

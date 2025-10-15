@@ -4,7 +4,7 @@
     (function(){
         var segs = location.pathname.split('/').filter(Boolean);
         var SLUG = 'euphoria';
-        var known = ['home','about','mods','euphoria','neonsigns','weightsraidtimer','thezonemaker','questimmersion'];
+        var known = ['home','about','mods','euphoria','neonsigns','weightsraidtimer','thezonemaker','questimmersion','devtool'];
         var base = '/' + (segs[0] && !known.includes(segs[0]) ? segs[0] : '');
         location.replace(base + '/#' + SLUG + location.search);
     })();

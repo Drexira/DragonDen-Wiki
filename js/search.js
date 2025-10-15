@@ -15,7 +15,8 @@ const PAGES = [
     { id: 'neonsigns',       url: toAbs('pages/neonsigns/index.html'),        title: 'DD - Neon Signs' },
     { id: 'weightsraidtimer',url: toAbs('pages/weightsraidtimer/index.html'), title: 'DD - Weights and Raid Timer' },
     { id: 'thezonemaker',    url: toAbs('pages/thezonemaker/index.html'),     title: 'DD - The Zone Maker' },
-    { id: 'questimmersion',  url: toAbs('pages/questimmersion/index.html'),   title: 'DD - Quest Immersion' }
+    { id: 'questimmersion',  url: toAbs('pages/questimmersion/index.html'),   title: 'DD - Quest Immersion' },
+    { id: 'devtool',         url: toAbs('pages/devtool/index.html'),          title: 'DD - DevTool' },
 ];
 
 const INDEX = new Map();

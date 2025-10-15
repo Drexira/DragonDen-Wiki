@@ -6,7 +6,8 @@
     ['neonsigns',       'pages/neonsigns/index.html'],
     ['weightsraidtimer','pages/weightsraidtimer/index.html'],
     ['thezonemaker',    'pages/thezonemaker/index.html'],
-    ['questimmersion',  'pages/questimmersion/index.html']
+    ['questimmersion',  'pages/questimmersion/index.html'],
+    ['devtool',        'pages/devtool/index.html'],
 ]);
 
 const GLOBAL_HINTS = [
