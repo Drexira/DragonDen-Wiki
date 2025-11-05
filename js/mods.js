@@ -1,7 +1,7 @@
 ﻿const API_BASE = 'https://forge.sp-tarkov.com/api/v0'
 const API_KEY = 'BbMpvEF1haCKrNgUphMNeUjLMyJCwPx9XxSMBx24fa47fc7f'
 const OWN_MOD_IDS = [2396,2330,2304,2335,2336]
-const HELPED_MOD_IDS = [2308]
+const HELPED_MOD_IDS = [2310,2308]
 const FIELDS = 'id,name,slug,teaser,thumbnail,detail_url,downloads,featured,updated_at'
 
 async function getMods(ids){
